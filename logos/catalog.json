@@ -1,0 +1,1145 @@
+{
+ "categories": [
+  {
+   "id": "simhw",
+   "name": "Hardware simracing"
+  },
+  {
+   "id": "coches",
+   "name": "Fabricantes de coches"
+  },
+  {
+   "id": "pc",
+   "name": "PC / Tecnología"
+  },
+  {
+   "id": "seguridad",
+   "name": "Equipamiento y seguridad"
+  },
+  {
+   "id": "neumaticos",
+   "name": "Neumáticos"
+  },
+  {
+   "id": "lubricantes",
+   "name": "Combustible y lubricantes"
+  },
+  {
+   "id": "tecnica",
+   "name": "Técnica (frenos, llantas, escape...)"
+  },
+  {
+   "id": "bebidas",
+   "name": "Bebidas y energy"
+  },
+  {
+   "id": "sponsors",
+   "name": "Sponsors corporativos"
+  }
+ ],
+ "packs": [
+  {
+   "id": "gt3",
+   "name": "Kit GT3",
+   "logos": [
+    "pirelli",
+    "castrol",
+    "brembo",
+    "recaro",
+    "bell",
+    "redbull",
+    "santander",
+    "mobil"
+   ]
+  },
+  {
+   "id": "endurance",
+   "name": "Kit Endurance",
+   "logos": [
+    "michelin",
+    "totalenergies",
+    "gulf",
+    "tagheuer",
+    "dunlop",
+    "apracing",
+    "valvoline",
+    "dallara"
+   ]
+  },
+  {
+   "id": "clasico",
+   "name": "Kit Clásico 70s",
+   "logos": [
+    "gulf",
+    "martini",
+    "elf",
+    "firestone",
+    "texaco",
+    "sunoco",
+    "heineken",
+    "castrol"
+   ]
+  },
+  {
+   "id": "streamer",
+   "name": "Kit Streamer",
+   "logos": [
+    "logitech",
+    "thrustmaster",
+    "amd",
+    "nvidia",
+    "intel",
+    "twitch",
+    "youtube",
+    "benq"
+   ]
+  },
+  {
+   "id": "espanol",
+   "name": "Kit Español",
+   "logos": [
+    "repsol",
+    "santander",
+    "movistar",
+    "mapfre",
+    "cepsa",
+    "estrella",
+    "telefonica"
+   ]
+  }
+ ],
+ "logos": [
+  {
+   "id": "cubecontrols",
+   "name": "Cube Controls",
+   "cat": "simhw",
+   "search": "Cube Controls logo png transparente"
+  },
+  {
+   "id": "fanatec",
+   "name": "Fanatec",
+   "cat": "simhw",
+   "search": "Fanatec logo png transparente"
+  },
+  {
+   "id": "heusinkveld",
+   "name": "Heusinkveld",
+   "cat": "simhw",
+   "search": "Heusinkveld logo png transparente"
+  },
+  {
+   "id": "iracing",
+   "name": "iRacing",
+   "cat": "simhw",
+   "search": "iRacing logo png transparente"
+  },
+  {
+   "id": "logitech",
+   "name": "Logitech",
+   "cat": "simhw",
+   "commons": "Logitech_logo.svg"
+  },
+  {
+   "id": "moza",
+   "name": "MOZA Racing",
+   "cat": "simhw",
+   "search": "MOZA Racing logo png transparente"
+  },
+  {
+   "id": "simagic",
+   "name": "Simagic",
+   "cat": "simhw",
+   "search": "Simagic logo png transparente"
+  },
+  {
+   "id": "simucube",
+   "name": "Simucube",
+   "cat": "simhw",
+   "search": "Simucube logo png transparente"
+  },
+  {
+   "id": "thrustmaster",
+   "name": "Thrustmaster",
+   "cat": "simhw",
+   "commons": "Thrustmaster-Logo.svg"
+  },
+  {
+   "id": "acura",
+   "name": "Acura",
+   "cat": "coches",
+   "commons": "Acura logo.svg"
+  },
+  {
+   "id": "alfaromeo",
+   "name": "Alfa Romeo",
+   "cat": "coches",
+   "search": "Alfa Romeo logo png transparente"
+  },
+  {
+   "id": "alpinecars",
+   "name": "Alpine (coches)",
+   "cat": "coches",
+   "search": "Automobiles Alpine logo png transparente"
+  },
+  {
+   "id": "astonmartin",
+   "name": "Aston Martin (texto)",
+   "cat": "coches",
+   "commons": "Aston Martin wordmark.svg"
+  },
+  {
+   "id": "audi",
+   "name": "Audi",
+   "cat": "coches",
+   "commons": "Audi-Logo 2016.svg"
+  },
+  {
+   "id": "bentley",
+   "name": "Bentley",
+   "cat": "coches",
+   "search": "Bentley logo png transparente"
+  },
+  {
+   "id": "bmw",
+   "name": "BMW",
+   "cat": "coches",
+   "commons": "BMW.svg"
+  },
+  {
+   "id": "bmwm",
+   "name": "BMW M",
+   "cat": "coches",
+   "commons": "BMW M logo.svg"
+  },
+  {
+   "id": "bugatti",
+   "name": "Bugatti",
+   "cat": "coches",
+   "commons": "Bugatti logo.svg"
+  },
+  {
+   "id": "cadillac",
+   "name": "Cadillac",
+   "cat": "coches",
+   "search": "Cadillac logo png transparente"
+  },
+  {
+   "id": "chevrolet",
+   "name": "Chevrolet",
+   "cat": "coches",
+   "commons": "Chevrolet-logo.svg"
+  },
+  {
+   "id": "dallara",
+   "name": "Dallara",
+   "cat": "coches",
+   "commons": "Dallara logo.svg"
+  },
+  {
+   "id": "dodge",
+   "name": "Dodge",
+   "cat": "coches",
+   "commons": "Dodge logo.svg"
+  },
+  {
+   "id": "ferrari",
+   "name": "Ferrari (texto)",
+   "cat": "coches",
+   "commons": "Ferrari wordmark.svg"
+  },
+  {
+   "id": "ford",
+   "name": "Ford",
+   "cat": "coches",
+   "commons": "Ford logo flat.svg"
+  },
+  {
+   "id": "ginetta",
+   "name": "Ginetta",
+   "cat": "coches",
+   "search": "Ginetta logo png transparente"
+  },
+  {
+   "id": "honda",
+   "name": "Honda",
+   "cat": "coches",
+   "commons": "Honda Logo.svg"
+  },
+  {
+   "id": "hyundai",
+   "name": "Hyundai",
+   "cat": "coches",
+   "commons": "Hyundai Motor Company logo.svg"
+  },
+  {
+   "id": "jaguar",
+   "name": "Jaguar",
+   "cat": "coches",
+   "commons": "Jaguar 2001 wordmark.svg"
+  },
+  {
+   "id": "koenigsegg",
+   "name": "Koenigsegg",
+   "cat": "coches",
+   "commons": "Koenigsegg logo.svg"
+  },
+  {
+   "id": "lamborghini",
+   "name": "Lamborghini",
+   "cat": "coches",
+   "commons": "Lamborghini logo.svg"
+  },
+  {
+   "id": "lexus",
+   "name": "Lexus",
+   "cat": "coches",
+   "commons": "Lexus logo.svg"
+  },
+  {
+   "id": "ligier",
+   "name": "Ligier",
+   "cat": "coches",
+   "commons": "Logo Ligier.svg"
+  },
+  {
+   "id": "lotus",
+   "name": "Lotus",
+   "cat": "coches",
+   "search": "Lotus Cars logo png transparente"
+  },
+  {
+   "id": "mazda",
+   "name": "Mazda",
+   "cat": "coches",
+   "commons": "Mazda logo.svg"
+  },
+  {
+   "id": "mclaren",
+   "name": "McLaren",
+   "cat": "coches",
+   "commons": "McLaren Automotive logo.svg"
+  },
+  {
+   "id": "amg",
+   "name": "Mercedes-AMG",
+   "cat": "coches",
+   "commons": "AMG Logo.svg"
+  },
+  {
+   "id": "mercedes",
+   "name": "Mercedes-Benz",
+   "cat": "coches",
+   "commons": "Mercedes-Logo.svg"
+  },
+  {
+   "id": "mini",
+   "name": "MINI",
+   "cat": "coches",
+   "commons": "MINI logo.svg"
+  },
+  {
+   "id": "mitsubishi",
+   "name": "Mitsubishi",
+   "cat": "coches",
+   "commons": "Mitsubishi logo.svg"
+  },
+  {
+   "id": "nismo",
+   "name": "Nismo",
+   "cat": "coches",
+   "commons": "Nismo logo.svg"
+  },
+  {
+   "id": "nissan",
+   "name": "Nissan",
+   "cat": "coches",
+   "commons": "Nissan 2020 logo.svg"
+  },
+  {
+   "id": "pagani",
+   "name": "Pagani",
+   "cat": "coches",
+   "search": "Pagani logo png transparente"
+  },
+  {
+   "id": "peugeot",
+   "name": "Peugeot",
+   "cat": "coches",
+   "commons": "Peugeot logo.svg"
+  },
+  {
+   "id": "porsche",
+   "name": "Porsche (texto)",
+   "cat": "coches",
+   "commons": "Porsche wordmark.svg"
+  },
+  {
+   "id": "radical",
+   "name": "Radical",
+   "cat": "coches",
+   "search": "Radical Sportscars logo png transparente"
+  },
+  {
+   "id": "renault",
+   "name": "Renault",
+   "cat": "coches",
+   "commons": "Renault 2021 Text.svg"
+  },
+  {
+   "id": "subaru",
+   "name": "Subaru",
+   "cat": "coches",
+   "commons": "Subaru logo.svg"
+  },
+  {
+   "id": "toyota",
+   "name": "Toyota",
+   "cat": "coches",
+   "commons": "Toyota logo.svg"
+  },
+  {
+   "id": "gazoo",
+   "name": "Toyota Gazoo Racing",
+   "cat": "coches",
+   "commons": "Toyota Gazoo Racing logo.svg"
+  },
+  {
+   "id": "vw",
+   "name": "Volkswagen",
+   "cat": "coches",
+   "commons": "Volkswagen logo 2019.svg"
+  },
+  {
+   "id": "skoda",
+   "name": "Škoda",
+   "cat": "coches",
+   "commons": "Skoda-Auto-Logo-2011-present.svg"
+  },
+  {
+   "id": "alpine",
+   "name": "Alpine Electronics",
+   "cat": "pc",
+   "commons": "Alpine logo.svg"
+  },
+  {
+   "id": "amd",
+   "name": "AMD",
+   "cat": "pc",
+   "commons": "AMD_Logo.svg"
+  },
+  {
+   "id": "asus",
+   "name": "ASUS",
+   "cat": "pc",
+   "commons": "ASUS Logo.svg"
+  },
+  {
+   "id": "benq",
+   "name": "BenQ",
+   "cat": "pc",
+   "commons": "BenQ-Logo.svg"
+  },
+  {
+   "id": "corsair",
+   "name": "Corsair",
+   "cat": "pc",
+   "search": "Corsair gaming logo png transparente"
+  },
+  {
+   "id": "dell",
+   "name": "Dell",
+   "cat": "pc",
+   "commons": "Dell Logo.svg"
+  },
+  {
+   "id": "discord",
+   "name": "Discord",
+   "cat": "pc",
+   "search": "Discord logo png transparente"
+  },
+  {
+   "id": "gigabyte",
+   "name": "Gigabyte",
+   "cat": "pc",
+   "commons": "Gigabyte Technology logo 20080107.svg"
+  },
+  {
+   "id": "gopro",
+   "name": "GoPro",
+   "cat": "pc",
+   "commons": "GoPro logo.svg"
+  },
+  {
+   "id": "hp",
+   "name": "HP",
+   "cat": "pc",
+   "commons": "HP logo 2012.svg"
+  },
+  {
+   "id": "intel",
+   "name": "Intel",
+   "cat": "pc",
+   "commons": "Intel_logo_2023.svg"
+  },
+  {
+   "id": "lg",
+   "name": "LG",
+   "cat": "pc",
+   "commons": "LG logo (2015).svg"
+  },
+  {
+   "id": "meta",
+   "name": "Meta",
+   "cat": "pc",
+   "commons": "Meta Platforms Inc. logo.svg"
+  },
+  {
+   "id": "microsoft",
+   "name": "Microsoft",
+   "cat": "pc",
+   "commons": "Microsoft logo (2012).svg"
+  },
+  {
+   "id": "msi",
+   "name": "MSI",
+   "cat": "pc",
+   "commons": "Micro-Star International logo2020.svg"
+  },
+  {
+   "id": "nvidia",
+   "name": "NVIDIA",
+   "cat": "pc",
+   "commons": "Nvidia_logo.svg"
+  },
+  {
+   "id": "nzxt",
+   "name": "NZXT",
+   "cat": "pc",
+   "commons": "Logo NZXT.svg"
+  },
+  {
+   "id": "razer",
+   "name": "Razer",
+   "cat": "pc",
+   "commons": "Razer wordmark.svg"
+  },
+  {
+   "id": "rog",
+   "name": "ROG (ASUS)",
+   "cat": "pc",
+   "commons": "ASUS ROG 2007 logo.svg"
+  },
+  {
+   "id": "samsung",
+   "name": "Samsung",
+   "cat": "pc",
+   "commons": "Samsung Logo.svg"
+  },
+  {
+   "id": "twitch",
+   "name": "Twitch",
+   "cat": "pc",
+   "commons": "Twitch logo 2019.svg"
+  },
+  {
+   "id": "youtube",
+   "name": "YouTube",
+   "cat": "pc",
+   "commons": "YouTube Logo 2017.svg"
+  },
+  {
+   "id": "alpinestars",
+   "name": "Alpinestars",
+   "cat": "seguridad",
+   "commons": "Alpinestars_logo.svg"
+  },
+  {
+   "id": "arai",
+   "name": "Arai",
+   "cat": "seguridad",
+   "search": "Arai helmet logo png transparente"
+  },
+  {
+   "id": "bell",
+   "name": "Bell Helmets",
+   "cat": "seguridad",
+   "commons": "Bell_Helmets_logo.svg"
+  },
+  {
+   "id": "momo",
+   "name": "MOMO",
+   "cat": "seguridad",
+   "commons": "Momo_Logo.svg"
+  },
+  {
+   "id": "omp",
+   "name": "OMP Racing",
+   "cat": "seguridad",
+   "search": "OMP Racing logo png transparente"
+  },
+  {
+   "id": "recaro",
+   "name": "Recaro",
+   "cat": "seguridad",
+   "commons": "Recaro_Logo.svg"
+  },
+  {
+   "id": "sabelt",
+   "name": "Sabelt",
+   "cat": "seguridad",
+   "commons": "Sabelt_logo.svg"
+  },
+  {
+   "id": "schuberth",
+   "name": "Schuberth",
+   "cat": "seguridad",
+   "commons": "Schuberth-logo.svg"
+  },
+  {
+   "id": "simpson",
+   "name": "Simpson Race Products",
+   "cat": "seguridad",
+   "search": "Simpson racing logo png transparente"
+  },
+  {
+   "id": "sparco",
+   "name": "Sparco",
+   "cat": "seguridad",
+   "search": "Sparco logo png transparente"
+  },
+  {
+   "id": "stilo",
+   "name": "Stilo",
+   "cat": "seguridad",
+   "search": "Stilo helmets logo png transparente"
+  },
+  {
+   "id": "bfgoodrich",
+   "name": "BFGoodrich",
+   "cat": "neumaticos",
+   "commons": "BFGoodrich logo.svg"
+  },
+  {
+   "id": "bridgestone",
+   "name": "Bridgestone",
+   "cat": "neumaticos",
+   "commons": "Bridgestone logo.svg"
+  },
+  {
+   "id": "continental",
+   "name": "Continental",
+   "cat": "neumaticos",
+   "commons": "Continental logo.svg"
+  },
+  {
+   "id": "dunlop",
+   "name": "Dunlop",
+   "cat": "neumaticos",
+   "commons": "Logo-dunlop.svg"
+  },
+  {
+   "id": "falken",
+   "name": "Falken",
+   "cat": "neumaticos",
+   "commons": "Falken Tire logo.svg"
+  },
+  {
+   "id": "firestone",
+   "name": "Firestone",
+   "cat": "neumaticos",
+   "commons": "Firestone.svg"
+  },
+  {
+   "id": "goodyear",
+   "name": "Goodyear",
+   "cat": "neumaticos",
+   "search": "Goodyear logo png transparente"
+  },
+  {
+   "id": "hankook",
+   "name": "Hankook",
+   "cat": "neumaticos",
+   "commons": "Hankook Tire logo.svg"
+  },
+  {
+   "id": "kumho",
+   "name": "Kumho",
+   "cat": "neumaticos",
+   "commons": "Kumho Tire logo (2023).svg"
+  },
+  {
+   "id": "michelin",
+   "name": "Michelin",
+   "cat": "neumaticos",
+   "commons": "Michelin_Wordmark.svg"
+  },
+  {
+   "id": "pirelli",
+   "name": "Pirelli (clásico)",
+   "cat": "neumaticos",
+   "commons": "Pirelli_-_logo_black_(Italy,_1970).svg"
+  },
+  {
+   "id": "toyo",
+   "name": "Toyo Tires",
+   "cat": "neumaticos",
+   "commons": "Toyo Tire logo.svg"
+  },
+  {
+   "id": "yokohama",
+   "name": "Yokohama",
+   "cat": "neumaticos",
+   "commons": "Yokohama (Unternehmen) logo.svg"
+  },
+  {
+   "id": "bp",
+   "name": "BP",
+   "cat": "lubricantes",
+   "search": "BP Helios logo png transparente"
+  },
+  {
+   "id": "castrol",
+   "name": "Castrol",
+   "cat": "lubricantes",
+   "commons": "Castrol_logo_2023.svg"
+  },
+  {
+   "id": "cepsa",
+   "name": "Cepsa",
+   "cat": "lubricantes",
+   "commons": "Cepsa.svg"
+  },
+  {
+   "id": "elf",
+   "name": "Elf",
+   "cat": "lubricantes",
+   "commons": "Elf brand textlogo.svg"
+  },
+  {
+   "id": "exxonmobil",
+   "name": "ExxonMobil",
+   "cat": "lubricantes",
+   "commons": "ExxonMobil Logo.svg"
+  },
+  {
+   "id": "gulf",
+   "name": "Gulf",
+   "cat": "lubricantes",
+   "commons": "Gulf_Oil_logo.svg"
+  },
+  {
+   "id": "liquimoly",
+   "name": "Liqui Moly",
+   "cat": "lubricantes",
+   "commons": "Liqui-moly.svg"
+  },
+  {
+   "id": "mobil",
+   "name": "Mobil",
+   "cat": "lubricantes",
+   "commons": "Mobil_logo.svg"
+  },
+  {
+   "id": "motul",
+   "name": "Motul",
+   "cat": "lubricantes",
+   "commons": "Motul logo.svg"
+  },
+  {
+   "id": "pennzoil",
+   "name": "Pennzoil",
+   "cat": "lubricantes",
+   "search": "Pennzoil logo png transparente"
+  },
+  {
+   "id": "petronas",
+   "name": "Petronas",
+   "cat": "lubricantes",
+   "commons": "Petronas Logo.svg"
+  },
+  {
+   "id": "repsol",
+   "name": "Repsol",
+   "cat": "lubricantes",
+   "commons": "Repsol logo.svg"
+  },
+  {
+   "id": "shell",
+   "name": "Shell",
+   "cat": "lubricantes",
+   "search": "Shell pecten logo png transparente"
+  },
+  {
+   "id": "stp",
+   "name": "STP",
+   "cat": "lubricantes",
+   "search": "STP racing logo png transparente"
+  },
+  {
+   "id": "sunoco",
+   "name": "Sunoco",
+   "cat": "lubricantes",
+   "commons": "Sunoco 1999 logo.svg"
+  },
+  {
+   "id": "texaco",
+   "name": "Texaco",
+   "cat": "lubricantes",
+   "commons": "Texaco logo.svg"
+  },
+  {
+   "id": "totalenergies",
+   "name": "TotalEnergies",
+   "cat": "lubricantes",
+   "commons": "TotalEnergies wordmark (2021-present).svg"
+  },
+  {
+   "id": "valvoline",
+   "name": "Valvoline",
+   "cat": "lubricantes",
+   "commons": "Valvoline company logo.svg"
+  },
+  {
+   "id": "vpracing",
+   "name": "VP Racing Fuels",
+   "cat": "lubricantes",
+   "search": "VP Racing Fuels logo png transparente"
+  },
+  {
+   "id": "akrapovic",
+   "name": "Akrapovič",
+   "cat": "tecnica",
+   "search": "Akrapovic logo png transparente"
+  },
+  {
+   "id": "apracing",
+   "name": "AP Racing",
+   "cat": "tecnica",
+   "commons": "AP Racing 2026.svg"
+  },
+  {
+   "id": "bbs",
+   "name": "BBS",
+   "cat": "tecnica",
+   "commons": "BBS logo.svg"
+  },
+  {
+   "id": "bilstein",
+   "name": "Bilstein",
+   "cat": "tecnica",
+   "commons": "Bilstein Logo.svg"
+  },
+  {
+   "id": "borla",
+   "name": "Borla",
+   "cat": "tecnica",
+   "search": "Borla exhaust logo png transparente"
+  },
+  {
+   "id": "bosch",
+   "name": "Bosch",
+   "cat": "tecnica",
+   "commons": "Bosch-logo.svg"
+  },
+  {
+   "id": "brembo",
+   "name": "Brembo",
+   "cat": "tecnica",
+   "commons": "Brembo_logo.svg"
+  },
+  {
+   "id": "denso",
+   "name": "Denso",
+   "cat": "tecnica",
+   "commons": "Denso logo.svg"
+  },
+  {
+   "id": "eibach",
+   "name": "Eibach",
+   "cat": "tecnica",
+   "search": "Eibach logo png transparente"
+  },
+  {
+   "id": "enkei",
+   "name": "Enkei",
+   "cat": "tecnica",
+   "search": "Enkei wheels logo png transparente"
+  },
+  {
+   "id": "garrett",
+   "name": "Garrett",
+   "cat": "tecnica",
+   "search": "Garrett turbo logo png transparente"
+  },
+  {
+   "id": "hella",
+   "name": "Hella",
+   "cat": "tecnica",
+   "commons": "Hella Logo.svg"
+  },
+  {
+   "id": "kn",
+   "name": "K&N",
+   "cat": "tecnica",
+   "search": "K&N filters logo png transparente"
+  },
+  {
+   "id": "magnaflow",
+   "name": "MagnaFlow",
+   "cat": "tecnica",
+   "search": "MagnaFlow logo png transparente"
+  },
+  {
+   "id": "mahle",
+   "name": "Mahle",
+   "cat": "tecnica",
+   "commons": "Mahle logo.svg"
+  },
+  {
+   "id": "ngk",
+   "name": "NGK",
+   "cat": "tecnica",
+   "commons": "Ngk_logo.svg"
+  },
+  {
+   "id": "ozracing",
+   "name": "OZ Racing",
+   "cat": "tecnica",
+   "search": "OZ Racing wheels logo png transparente"
+  },
+  {
+   "id": "rays",
+   "name": "Rays / Volk Racing",
+   "cat": "tecnica",
+   "search": "Volk Racing Rays logo png transparente"
+  },
+  {
+   "id": "sachs",
+   "name": "Sachs",
+   "cat": "tecnica",
+   "commons": "ZF Sachs logo.svg"
+  },
+  {
+   "id": "snapon",
+   "name": "Snap-on",
+   "cat": "tecnica",
+   "commons": "Snap-on logo.svg"
+  },
+  {
+   "id": "wurth",
+   "name": "Würth",
+   "cat": "tecnica",
+   "commons": "Würth logo.svg"
+  },
+  {
+   "id": "zf",
+   "name": "ZF",
+   "cat": "tecnica",
+   "commons": "ZF logo STD Blue 3CC.svg"
+  },
+  {
+   "id": "ohlins",
+   "name": "Öhlins",
+   "cat": "tecnica",
+   "commons": "Oehlins logo.svg"
+  },
+  {
+   "id": "cocacola",
+   "name": "Coca-Cola",
+   "cat": "bebidas",
+   "commons": "Coca-Cola logo.svg"
+  },
+  {
+   "id": "corona",
+   "name": "Corona",
+   "cat": "bebidas",
+   "search": "Corona Extra logo png transparente"
+  },
+  {
+   "id": "estrella",
+   "name": "Estrella Galicia",
+   "cat": "bebidas",
+   "commons": "Estrella Galicia escudo color vectorial HDJR.svg"
+  },
+  {
+   "id": "heineken",
+   "name": "Heineken",
+   "cat": "bebidas",
+   "commons": "Heineken logo.svg"
+  },
+  {
+   "id": "jagermeister",
+   "name": "Jägermeister",
+   "cat": "bebidas",
+   "search": "Jagermeister logo png transparente"
+  },
+  {
+   "id": "mahou",
+   "name": "Mahou",
+   "cat": "bebidas",
+   "search": "Mahou cerveza logo png transparente"
+  },
+  {
+   "id": "martini",
+   "name": "Martini",
+   "cat": "bebidas",
+   "commons": "Martini Logo.svg"
+  },
+  {
+   "id": "monster",
+   "name": "Monster Energy",
+   "cat": "bebidas",
+   "search": "Monster Energy logo png transparente"
+  },
+  {
+   "id": "pepsi",
+   "name": "Pepsi",
+   "cat": "bebidas",
+   "commons": "Pepsi logo 2014.svg"
+  },
+  {
+   "id": "redbull",
+   "name": "Red Bull",
+   "cat": "bebidas",
+   "commons": "Logo_of_Red_bull.svg"
+  },
+  {
+   "id": "rockstar",
+   "name": "Rockstar Energy",
+   "cat": "bebidas",
+   "search": "Rockstar Energy logo png transparente"
+  },
+  {
+   "id": "adidas",
+   "name": "Adidas",
+   "cat": "sponsors",
+   "commons": "Adidas Logo.svg"
+  },
+  {
+   "id": "allianz",
+   "name": "Allianz",
+   "cat": "sponsors",
+   "commons": "Allianz logo.svg"
+  },
+  {
+   "id": "casio",
+   "name": "Casio",
+   "cat": "sponsors",
+   "commons": "Casio logo.svg"
+  },
+  {
+   "id": "cryptocom",
+   "name": "Crypto.com",
+   "cat": "sponsors",
+   "search": "Crypto.com logo png transparente"
+  },
+  {
+   "id": "dhl",
+   "name": "DHL",
+   "cat": "sponsors",
+   "commons": "DHL Logo.svg"
+  },
+  {
+   "id": "emirates",
+   "name": "Emirates",
+   "cat": "sponsors",
+   "commons": "Emirates logo.svg"
+  },
+  {
+   "id": "fedex",
+   "name": "FedEx",
+   "cat": "sponsors",
+   "commons": "FedEx Express.svg"
+  },
+  {
+   "id": "mapfre",
+   "name": "Mapfre",
+   "cat": "sponsors",
+   "commons": "Mapfre logo.svg"
+  },
+  {
+   "id": "mastercard",
+   "name": "Mastercard",
+   "cat": "sponsors",
+   "commons": "Mastercard-logo.svg"
+  },
+  {
+   "id": "movistar",
+   "name": "Movistar",
+   "cat": "sponsors",
+   "commons": "Movistar 2020 logo.svg"
+  },
+  {
+   "id": "nike",
+   "name": "Nike",
+   "cat": "sponsors",
+   "commons": "Logo NIKE.svg"
+  },
+  {
+   "id": "oakley",
+   "name": "Oakley",
+   "cat": "sponsors",
+   "commons": "Oakley logo.svg"
+  },
+  {
+   "id": "orange",
+   "name": "Orange",
+   "cat": "sponsors",
+   "commons": "Orange logo.svg"
+  },
+  {
+   "id": "puma",
+   "name": "Puma",
+   "cat": "sponsors",
+   "search": "Puma logo png transparente"
+  },
+  {
+   "id": "qatarairways",
+   "name": "Qatar Airways",
+   "cat": "sponsors",
+   "commons": "Qatar Airways logo.svg"
+  },
+  {
+   "id": "rolex",
+   "name": "Rolex",
+   "cat": "sponsors",
+   "search": "Rolex logo png transparente"
+  },
+  {
+   "id": "santander",
+   "name": "Santander",
+   "cat": "sponsors",
+   "commons": "Banco Santander Logotipo.svg"
+  },
+  {
+   "id": "tagheuer",
+   "name": "TAG Heuer",
+   "cat": "sponsors",
+   "commons": "TAG Heuer Logo.svg"
+  },
+  {
+   "id": "telefonica",
+   "name": "Telefónica",
+   "cat": "sponsors",
+   "commons": "Telefonica Logo.svg"
+  },
+  {
+   "id": "ups",
+   "name": "UPS",
+   "cat": "sponsors",
+   "commons": "UPS Logo Shield 2017.svg"
+  },
+  {
+   "id": "visa",
+   "name": "Visa",
+   "cat": "sponsors",
+   "commons": "Visa Inc. logo.svg"
+  },
+  {
+   "id": "vodafone",
+   "name": "Vodafone",
+   "cat": "sponsors",
+   "commons": "Vodafone logo 2017.svg"
+  }
+ ]
+}

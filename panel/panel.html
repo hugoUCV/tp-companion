@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>TP Companion</title>
+  <link rel="stylesheet" href="panel.css" />
+</head>
+<body>
+  <header>
+    <div class="brand"><span class="dot"></span> TP Companion</div>
+    <nav>
+      <button class="tab active" data-tab="colores">Colores</button>
+      <button class="tab" data-tab="logos">Logos</button>
+      <button id="open-studio" class="tab studio-btn" title="Abrir el Estudio a pantalla completa">⛶ Estudio</button>
+      <button id="open-donate" class="tab donate-btn" title="Invitar a un café al desarrollador">❤</button>
+    </nav>
+  </header>
+
+  <!-- ============ TAB COLORES ============ -->
+  <main id="tab-colores" class="tabpane active">
+    <section>
+      <div class="sec-head">
+        <h2>Historial</h2>
+        <div class="sec-tools">
+          <input id="manual-hex" type="text" placeholder="#a1b2c3" maxlength="7" spellcheck="false" />
+          <input id="manual-color" type="color" title="Elegir color" />
+          <button id="add-manual" class="btn small">Añadir</button>
+          <button id="clear-history" class="btn small ghost" title="Vaciar historial">🗑</button>
+        </div>
+      </div>
+      <p class="muted">Los colores que uses en tradingpaints.com aparecen aquí solos. Click = copiar · ＋ = añadir a la paleta activa.</p>
+      <div id="history-grid" class="swatch-grid"></div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>Paletas</h2>
+        <div class="sec-tools">
+          <select id="palette-select" title="Paleta activa"></select>
+          <button id="new-palette" class="btn small">＋ Nueva</button>
+        </div>
+      </div>
+      <div id="palette-view"></div>
+    </section>
+
+    <details class="acc">
+      <summary>🖼 Extraer paleta de una imagen</summary>
+      <div class="acc-body">
+        <p class="muted">Sube una foto (un livery, un coche real, lo que sea) y saco sus colores dominantes.</p>
+        <input id="extract-file" type="file" accept="image/*" />
+        <div id="extract-result"></div>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>🏁 Paletas icónicas</summary>
+      <div class="acc-body">
+        <p class="muted">Esquemas legendarios del motorsport, listos para clonar a tus paletas.</p>
+        <div id="iconic-list"></div>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>🛠 Armonías y contraste</summary>
+      <div class="acc-body">
+        <div class="tool-row">
+          <b>Armonías</b>
+          <span class="sec-tools">
+            <input id="harm-hex" type="text" placeholder="#e8443a" maxlength="7" spellcheck="false" />
+            <input id="harm-color" type="color" />
+          </span>
+        </div>
+        <div id="harm-result"></div>
+        <div class="tool-row" style="margin-top:12px">
+          <b>Contraste fondo / dorsal</b>
+          <span class="sec-tools">
+            <input id="con-bg" type="color" value="#14181f" title="Fondo" />
+            <input id="con-fg" type="color" value="#ffffff" title="Número/dorsal" />
+          </span>
+        </div>
+        <div id="con-result" class="con-result"></div>
+      </div>
+    </details>
+
+    <details class="acc">
+      <summary>🎨 Códigos de pintura reales</summary>
+      <div class="acc-body">
+        <input id="paint-filter" type="text" placeholder="Buscar color o marca… (ej: nardo, gulf)" spellcheck="false" style="width:100%;margin-bottom:8px" />
+        <div id="paint-list"></div>
+        <p class="muted" id="paint-note" style="margin-top:8px"></p>
+      </div>
+    </details>
+  </main>
+
+  <!-- ============ TAB LOGOS ============ -->
+  <main id="tab-logos" class="tabpane">
+    <section>
+      <div class="sec-head"><h2>Buscador de logos</h2></div>
+      <div class="row">
+        <input id="web-q" type="text" placeholder="Marca o empresa… (ej: fanatec)" spellcheck="false" />
+        <button id="web-go" class="btn small primary">Buscar</button>
+      </div>
+      <label class="check"><input id="web-nobg" type="checkbox" checked /> Quitar fondo blanco al guardar/enviar</label>
+      <div id="web-results"></div>
+    </section>
+
+    <section>
+      <div class="sec-head"><h2>Packs</h2></div>
+      <div id="pack-list"></div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>Repositorio</h2>
+        <div class="sec-tools">
+          <input id="logo-filter" type="text" placeholder="Filtrar…" spellcheck="false" />
+          <button id="sel-toggle" class="btn small" title="Seleccionar varios para descargar en lote">☑</button>
+        </div>
+      </div>
+      <p class="muted"><b>➕ TP</b> lo añade directamente a Trading Paints · ⬇ descarga a <code>Descargas/TP-Companion</code> · click en una categoría para plegarla.</p>
+      <div class="logo-filter-row">
+        <span class="chip" id="filter-fav" title="Solo favoritos">★ Favoritos</span>
+        <span class="chip" id="filter-tag" title="Etiqueta activa" style="display:none"></span>
+      </div>
+      <div id="logo-list"></div>
+    </section>
+
+    <section>
+      <div class="sec-head"><h2>Añadir logo propio</h2></div>
+      <div class="add-form">
+        <input id="add-name" type="text" placeholder="Nombre" spellcheck="false" />
+        <select id="add-cat"></select>
+        <div class="row">
+          <input id="add-url" type="text" placeholder="URL de imagen (opcional)" spellcheck="false" />
+          <button id="add-from-url" class="btn small">Traer</button>
+        </div>
+        <div class="row">
+          <input id="add-file" type="file" accept="image/*" />
+        </div>
+        <input id="add-tags" type="text" placeholder="Etiquetas (separadas por coma)" spellcheck="false" />
+        <label class="check"><input id="add-nobg" type="checkbox" checked /> Quitar fondo blanco al añadir</label>
+        <label class="check"><input id="add-fav" type="checkbox" /> Marcar como favorito</label>
+      </div>
+      <p class="muted legal">Los logos son marcas registradas de sus dueños: úsalos solo en tus liveries personales.</p>
+    </section>
+  </main>
+
+  <div id="sel-bar" class="sel-bar">
+    <span id="sel-count"></span>
+    <button id="sel-download" class="btn small primary">⬇ Descargar selección</button>
+    <button id="sel-cancel" class="btn small ghost">✕</button>
+  </div>
+
+  <footer id="settings-bar">
+    <label class="check"><input type="checkbox" id="set-widget" checked /> Widget 🎨 en Trading Paints</label>
+    <label class="check"><input type="checkbox" id="set-capture" checked /> Capturar colores automáticamente</label>
+  </footer>
+
+  <div id="toast"></div>
+
+  <!-- Donación -->
+  <div id="donate" class="onboard" hidden>
+    <div class="onboard-card donate-card">
+      <button id="donate-close" class="donate-close" title="Cerrar">✕</button>
+      <div class="donate-heart">❤</div>
+      <h3>¿Te está siendo útil?</h3>
+      <p>TP Companion es <b>gratis y sin anuncios</b>. Si te ahorra tiempo, una donación de un café ayuda a mantenerlo y a seguir añadiendo cosas chulas.</p>
+      <button id="donate-open" class="paypal-btn" type="button" title="Donar con PayPal">
+        <svg class="paypal-mark" viewBox="0 0 24 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M19.9 6.4c.5 3.7-1.9 7.3-5.7 7.3h-3l-1 6.3H6.7L8.9 3.6h6.4c2.7 0 4.3 1 4.6 2.8z" fill="#009CDE"/>
+          <path d="M16.6 8.3c.5 3.7-1.9 7.3-5.7 7.3h-3l-1.1 6.7H3.4L5.6 5.5H12c2.7 0 4.3 1 4.6 2.8z" fill="#003087"/>
+        </svg>
+        <span class="paypal-text">Donar con <span class="paypal-wordmark"><b>Pay</b><i>Pal</i></span></span>
+      </button>
+      <button id="donate-copy" class="donate-copy-link" type="button">o copiar enlace</button>
+      <p class="donate-thx">Gracias por estar ahí 🙏</p>
+    </div>
+  </div>
+
+  <!-- Onboarding modal (primera vez) -->
+  <div id="onboarding" class="onboard" hidden>
+    <div class="onboard-card">
+      <div class="onboard-slide active" data-slide="0">
+        <div class="onboard-emoji">🎨</div>
+        <h3>Bienvenido a TP Companion</h3>
+        <p>Una capa de herramientas encima de <b>Trading Paints Pro</b> para liveries de iRacing: colores, logos, texturas y formas — todo a un click.</p>
+      </div>
+      <div class="onboard-slide" data-slide="1">
+        <div class="onboard-emoji">🎯</div>
+        <h3>Widget flotante 🎨</h3>
+        <p>En tradingpaints.com verás un botón <b>🎨</b> abajo a la derecha. Abre el panel con los colores que has usado, el cuentagotas y los botones para copiar/pegar capas del Paint Builder.</p>
+        <p class="muted">Los colores se guardan solos mientras pintas.</p>
+      </div>
+      <div class="onboard-slide" data-slide="2">
+        <div class="onboard-emoji">⛶</div>
+        <h3>Estudio</h3>
+        <p>Pulsa <b>⛶ Estudio</b> arriba a la derecha para abrir la pestaña grande: taller de logos, generador de texturas, editor de formas multicapa y mood board.</p>
+        <p class="muted">Todo lo que envíes a TP con <b>➕ TP</b> se encola y se inyecta solo cuando aparezca un formulario de subida.</p>
+      </div>
+      <div class="onboard-foot">
+        <span class="onboard-dots">
+          <span class="dot-mark active"></span><span class="dot-mark"></span><span class="dot-mark"></span>
+        </span>
+        <button id="onboard-skip" class="btn small ghost">Saltar</button>
+        <button id="onboard-next" class="btn small primary">Siguiente</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="panel.js"></script>
+</body>
+</html>

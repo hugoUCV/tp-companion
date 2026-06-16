@@ -1,0 +1,133 @@
+{
+  "note": "Hex aproximados, ajustados para pantalla (no son códigos de pintura física exactos). Pensados como punto de partida para liveries.",
+  "groups": [
+    {
+      "brand": "Ferrari",
+      "colors": [
+        { "name": "Rosso Corsa", "hex": "#d40000" },
+        { "name": "Rosso Scuderia", "hex": "#e10600" },
+        { "name": "Rosso Dino", "hex": "#c1352b" },
+        { "name": "Giallo Modena", "hex": "#fff200" },
+        { "name": "Blu Tour de France", "hex": "#16284a" },
+        { "name": "Grigio Silverstone", "hex": "#8a8d8f" },
+        { "name": "Nero Daytona", "hex": "#1b1b1b" },
+        { "name": "Bianco Avus", "hex": "#f2f2ee" }
+      ]
+    },
+    {
+      "brand": "Porsche",
+      "colors": [
+        { "name": "Guards Red", "hex": "#cc1316" },
+        { "name": "Speed Yellow", "hex": "#fcd900" },
+        { "name": "Racing Yellow", "hex": "#ffd400" },
+        { "name": "Lava Orange", "hex": "#f3631f" },
+        { "name": "Miami Blue", "hex": "#00adc6" },
+        { "name": "Shark Blue", "hex": "#0a72b9" },
+        { "name": "Riviera Blue", "hex": "#1f3ea8" },
+        { "name": "GT Silver", "hex": "#c6c8ca" },
+        { "name": "Python Green", "hex": "#6d8b1f" },
+        { "name": "Carmine Red", "hex": "#9b1822" }
+      ]
+    },
+    {
+      "brand": "Audi / Sport",
+      "colors": [
+        { "name": "Nardo Grey", "hex": "#69696b" },
+        { "name": "Nogaro Blue", "hex": "#1f3b7a" },
+        { "name": "Misano Red", "hex": "#9c1f2e" },
+        { "name": "Suzuka Grey", "hex": "#9a9da0" },
+        { "name": "Sebring Black", "hex": "#1a1a1c" },
+        { "name": "Solar Orange", "hex": "#e8581c" }
+      ]
+    },
+    {
+      "brand": "BMW M",
+      "colors": [
+        { "name": "Estoril Blue", "hex": "#1d4aa0" },
+        { "name": "Laguna Seca Blue", "hex": "#3aa0e0" },
+        { "name": "Yas Marina Blue", "hex": "#1f5fae" },
+        { "name": "Frozen Grey", "hex": "#6f7479" },
+        { "name": "Alpine White", "hex": "#eef0ef" },
+        { "name": "Sao Paulo Yellow", "hex": "#e6c20a" },
+        { "name": "Imola Red", "hex": "#9d1119" },
+        { "name": "M Motorsport Blue", "hex": "#0066b1" },
+        { "name": "M Motorsport Violet", "hex": "#6e1f7a" },
+        { "name": "M Motorsport Red", "hex": "#e30613" }
+      ]
+    },
+    {
+      "brand": "Lamborghini",
+      "colors": [
+        { "name": "Verde Mantis", "hex": "#6dbb1a" },
+        { "name": "Arancio Borealis", "hex": "#e8590c" },
+        { "name": "Giallo Orion", "hex": "#f6c400" },
+        { "name": "Blu Cepheus", "hex": "#1b3f9e" },
+        { "name": "Verde Ithaca", "hex": "#3fa535" },
+        { "name": "Grigio Telesto", "hex": "#5b5d61" }
+      ]
+    },
+    {
+      "brand": "McLaren / Mercedes",
+      "colors": [
+        { "name": "McLaren Papaya", "hex": "#ff8000" },
+        { "name": "Volcano Orange", "hex": "#e2571e" },
+        { "name": "Mercedes Petronas Teal", "hex": "#00a19c" },
+        { "name": "AMG Solarbeam", "hex": "#f2d200" },
+        { "name": "AMG Green Hell Magno", "hex": "#3a4a37" },
+        { "name": "Designo Selenite Grey", "hex": "#5a5e63" }
+      ]
+    },
+    {
+      "brand": "Japonés (JDM)",
+      "colors": [
+        { "name": "Subaru World Rally Blue", "hex": "#0033a0" },
+        { "name": "Subaru Sonic Blue", "hex": "#1f6fd6" },
+        { "name": "Nissan Bayside Blue", "hex": "#0a4ea2" },
+        { "name": "Midnight Purple", "hex": "#2a1f4a" },
+        { "name": "Honda Championship White", "hex": "#eff0ea" },
+        { "name": "Honda Phoenix Yellow", "hex": "#f2a900" },
+        { "name": "Mazda Soul Red", "hex": "#a31419" },
+        { "name": "Toyota Gazoo White", "hex": "#f3f3f1" }
+      ]
+    },
+    {
+      "brand": "Americano (USA)",
+      "colors": [
+        { "name": "Grabber Blue", "hex": "#0072ce" },
+        { "name": "Ford Race Red", "hex": "#c8102e" },
+        { "name": "Chevy Rally Green", "hex": "#1b6b3a" },
+        { "name": "Hugger Orange", "hex": "#e35205" },
+        { "name": "Plum Crazy Purple", "hex": "#5b2a86" },
+        { "name": "Petty Blue", "hex": "#4aa3df" }
+      ]
+    },
+    {
+      "brand": "Clásicos racing / nacionales",
+      "colors": [
+        { "name": "British Racing Green", "hex": "#004225" },
+        { "name": "Gulf Light Blue", "hex": "#9bcbeb" },
+        { "name": "Gulf Orange", "hex": "#f36523" },
+        { "name": "French Racing Blue", "hex": "#002395" },
+        { "name": "Rosso Italia", "hex": "#cd212a" },
+        { "name": "German Silver Arrow", "hex": "#c4c6c8" },
+        { "name": "Martini Navy", "hex": "#10284c" },
+        { "name": "Martini Red", "hex": "#d2122e" },
+        { "name": "Martini Sky", "hex": "#5fb0e5" },
+        { "name": "JPS Gold", "hex": "#c9a227" }
+      ]
+    },
+    {
+      "brand": "Neutros y metalizados",
+      "colors": [
+        { "name": "Negro mate", "hex": "#161618" },
+        { "name": "Negro brillo", "hex": "#0a0a0b" },
+        { "name": "Blanco puro", "hex": "#ffffff" },
+        { "name": "Blanco hueso", "hex": "#f1efe7" },
+        { "name": "Gris antracita", "hex": "#2f3338" },
+        { "name": "Gris plata", "hex": "#b9bcc0" },
+        { "name": "Gris gunmetal", "hex": "#53585f" },
+        { "name": "Carbono", "hex": "#22242a" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TP Companion — Estudio</title>
+  <link rel="stylesheet" href="studio.css" />
+</head>
+<body>
+  <aside class="side">
+    <div class="brand"><span class="dot"></span> TP Companion<small>Estudio</small></div>
+    <nav>
+      <button class="navbtn active" data-view="logos">🪄 Taller de logos</button>
+      <button class="navbtn" data-view="texturas">🧵 Texturas</button>
+      <button class="navbtn" data-view="tablero">📌 Tablero</button>
+    </nav>
+    <div class="side-foot">
+      <select id="palette-select" title="Paleta activa"></select>
+      <button id="new-palette" class="btn small">＋ Paleta</button>
+    </div>
+    <button id="open-donate" class="btn small donate-side" title="Invitar a un café al desarrollador">❤ Apoyar el proyecto</button>
+  </aside>
+
+  <!-- Modal donación -->
+  <div id="donate" class="onboard" hidden>
+    <div class="onboard-card donate-card">
+      <button id="donate-close" class="donate-close" title="Cerrar">✕</button>
+      <div class="donate-heart">❤</div>
+      <h3>¿Te está siendo útil?</h3>
+      <p>TP Companion es <b>gratis y sin anuncios</b>. Si te ahorra tiempo, una donación de un café ayuda a mantenerlo y a seguir añadiendo cosas chulas.</p>
+      <button id="donate-open" class="paypal-btn" type="button" title="Donar con PayPal">
+        <svg class="paypal-mark" viewBox="0 0 24 28" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M19.9 6.4c.5 3.7-1.9 7.3-5.7 7.3h-3l-1 6.3H6.7L8.9 3.6h6.4c2.7 0 4.3 1 4.6 2.8z" fill="#009CDE"/>
+          <path d="M16.6 8.3c.5 3.7-1.9 7.3-5.7 7.3h-3l-1.1 6.7H3.4L5.6 5.5H12c2.7 0 4.3 1 4.6 2.8z" fill="#003087"/>
+        </svg>
+        <span class="paypal-text">Donar con <span class="paypal-wordmark"><b>Pay</b><i>Pal</i></span></span>
+      </button>
+      <button id="donate-copy" class="donate-copy-link" type="button">o copiar enlace</button>
+      <p class="donate-thx">Gracias por estar ahí 🙏</p>
+    </div>
+  </div>
+
+  <main class="content">
+    <!-- ===== TALLER DE LOGOS ===== -->
+    <section class="view active" id="view-logos">
+      <header class="vhead"><h1>Taller de logos</h1></header>
+      <p class="muted">Sube un logo (o mándalo desde la pestaña Logos del popup) y dale contorno o recórtalo al ras.</p>
+      <div class="work-layout">
+        <div class="work-controls">
+          <input id="work-file" type="file" accept="image/*" />
+          <div class="field">
+            <label>Contorno</label>
+            <div class="row2">
+              <div>
+                <label class="sub">Color</label>
+                <input id="work-outline-color" type="color" value="#ffffff" />
+              </div>
+              <div>
+                <label class="sub">Grosor: <b id="work-thick-val">8</b>px</label>
+                <input id="work-thick" type="range" min="1" max="40" value="8" />
+              </div>
+            </div>
+            <button id="work-outline" class="btn primary">🪄 Aplicar contorno</button>
+          </div>
+          <div class="field">
+            <label>Recorte transparente</label>
+            <div class="row2">
+              <div>
+                <label class="sub">Margen: <b id="work-pad-val">0</b>px</label>
+                <input id="work-pad" type="range" min="0" max="60" value="0" />
+              </div>
+            </div>
+            <button id="work-trim" class="btn">✂ Recortar al ras</button>
+          </div>
+          <div class="field">
+            <button id="work-removebg" class="btn small">Quitar fondo blanco</button>
+            <button id="work-reset" class="btn small ghost">↺ Volver al original</button>
+          </div>
+        </div>
+        <div class="work-stage">
+          <div id="work-canvas-wrap" class="checker">
+            <img id="work-img" alt="" />
+            <div id="work-placeholder" class="empty">Sube un logo o usa el botón 🪄 desde la pestaña Logos del popup.</div>
+          </div>
+          <div id="work-dims" class="muted"></div>
+          <div class="work-actions">
+            <button id="work-save" class="btn primary">💾 Guardar en Mis logos</button>
+            <button id="work-tp" class="btn">➕ Enviar a Trading Paints</button>
+            <button id="work-dl" class="btn">⬇ Descargar PNG</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TEXTURAS ===== -->
+    <section class="view" id="view-texturas">
+      <header class="vhead"><h1>Generador de texturas</h1></header>
+      <div class="tex-layout">
+        <div class="tex-controls">
+          <div class="field">
+            <input id="tex-search" type="text" placeholder="🔎 Buscar patrón… (camo, carbono, rayas)" spellcheck="false" style="width:100%" />
+            <div id="tex-thumbs" class="tex-thumbs"></div>
+          </div>
+          <div class="field">
+            <label>Colores <button id="tex-palette" class="btn small" title="Usar la paleta activa">🎨 paleta</button></label>
+            <div id="tex-colors" class="tex-colors"></div>
+            <div id="tex-presets" class="tex-presets"></div>
+          </div>
+          <div class="field">
+            <label>Ajustes <button id="tex-shuffle" class="btn small" title="Variar la distribución">🎲 variar</button></label>
+            <div id="tex-controls"></div>
+          </div>
+          <div class="field">
+            <label>Tamaño del tile (UV iRacing)</label>
+            <select id="tex-size">
+              <option value="512">512 × 512</option>
+              <option value="1024">1024 × 1024</option>
+              <option value="2048" selected>2048 × 2048 (UV estándar)</option>
+              <option value="4096">4096 × 4096 (UV Pro / alta)</option>
+              <option value="8192">8192 × 8192 (extremo)</option>
+            </select>
+          </div>
+          <div class="tex-actions">
+            <button id="tex-tp" class="btn primary">➕ Enviar a Trading Paints</button>
+            <button id="tex-dl" class="btn">⬇ Descargar PNG</button>
+          </div>
+        </div>
+        <div class="tex-stage">
+          <div class="muted">Vista previa (repetida en mosaico — sin costura):</div>
+          <div id="tex-preview" class="tex-preview"></div>
+          <canvas id="tex-canvas" width="1024" height="1024" hidden></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TABLERO ===== -->
+    <section class="view" id="view-tablero">
+      <header class="vhead">
+        <h1>Tablero de referencias</h1>
+        <div class="row">
+          <input id="board-url" type="text" placeholder="Pega una URL de imagen…" spellcheck="false" />
+          <button id="board-add-url" class="btn small">Añadir</button>
+          <input id="board-file" type="file" accept="image/*" multiple hidden />
+          <button id="board-add-file" class="btn small">Subir</button>
+        </div>
+      </header>
+      <p class="muted">Tu mood board de liveries que te molan. Click en una referencia para extraerle la paleta. Se guarda en local.</p>
+      <div id="board-grid" class="board-grid"></div>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+  <script src="../lib/tpc-core.js"></script>
+  <script src="textures.js"></script>
+  <script src="studio.js"></script>
+</body>
+</html>

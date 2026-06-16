@@ -1,0 +1,985 @@
+{
+ "direct": {
+  "porsche": {
+   "name": "Porsche",
+   "cat": "coches",
+   "file": "Porsche wordmark.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Porsche_wordmark.svg"
+  },
+  "bmw": {
+   "name": "BMW",
+   "cat": "coches",
+   "file": "BMW.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/44/BMW.svg"
+  },
+  "bmwm": {
+   "name": "BMW M",
+   "cat": "coches",
+   "file": "BMW M logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/b3/BMW_M_logo.svg"
+  },
+  "mercedes": {
+   "name": "Mercedes-Benz",
+   "cat": "coches",
+   "file": "Mercedes-Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg"
+  },
+  "amg": {
+   "name": "Mercedes-AMG",
+   "cat": "coches",
+   "file": "AMG Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/9/9f/Mercedes-AMG_logo_%28grey%29.svg"
+  },
+  "audi": {
+   "name": "Audi",
+   "cat": "coches",
+   "file": "Audi-Logo 2016.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/9/92/Audi-Logo_2016.svg"
+  },
+  "lamborghini": {
+   "name": "Lamborghini",
+   "cat": "coches",
+   "file": "Lamborghini logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Lamborghini_-_logo_wordmark%2Bpayoff_%28Italy%2C_1963-%29.svg"
+  },
+  "mclaren": {
+   "name": "McLaren",
+   "cat": "coches",
+   "file": "McLaren Automotive logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/ed/McLaren_Automotive_logo.svg"
+  },
+  "toyota": {
+   "name": "Toyota",
+   "cat": "coches",
+   "file": "Toyota logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Toyota_logo.svg"
+  },
+  "gazoo": {
+   "name": "Toyota Gazoo Racing",
+   "cat": "coches",
+   "file": "Toyota Gazoo Racing logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Toyota_Gazoo_Racing_logo.svg"
+  },
+  "honda": {
+   "name": "Honda",
+   "cat": "coches",
+   "file": "Honda Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Honda_Logo.svg"
+  },
+  "ford": {
+   "name": "Ford",
+   "cat": "coches",
+   "file": "Ford logo flat.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Ford_logo_flat.svg"
+  },
+  "chevrolet": {
+   "name": "Chevrolet",
+   "cat": "coches",
+   "file": "Chevrolet-logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/81/Chevrolet-logo.svg"
+  },
+  "dodge": {
+   "name": "Dodge",
+   "cat": "coches",
+   "file": "Dodge logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Dodge_logo.svg"
+  },
+  "nissan": {
+   "name": "Nissan",
+   "cat": "coches",
+   "file": "Nissan 2020 logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/23/Nissan_2020_logo.svg"
+  },
+  "nismo": {
+   "name": "Nismo",
+   "cat": "coches",
+   "file": "Nismo logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Nismo_logo.svg"
+  },
+  "mazda": {
+   "name": "Mazda",
+   "cat": "coches",
+   "file": "Mazda logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Mazda_logo.svg"
+  },
+  "hyundai": {
+   "name": "Hyundai",
+   "cat": "coches",
+   "file": "Hyundai Motor Company logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Hyundai_Motor_Company_logo.svg"
+  },
+  "alpine": {
+   "name": "Alpine (coches)",
+   "cat": "coches",
+   "file": "Alpine logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Alpine_logo.svg"
+  },
+  "renault": {
+   "name": "Renault",
+   "cat": "coches",
+   "file": "Renault 2021 Text.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Renault_2021_Text.svg"
+  },
+  "peugeot": {
+   "name": "Peugeot",
+   "cat": "coches",
+   "file": "Peugeot logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Peugeot_logo.svg"
+  },
+  "acura": {
+   "name": "Acura",
+   "cat": "coches",
+   "file": "Acura logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Acura_logo.svg"
+  },
+  "lexus": {
+   "name": "Lexus",
+   "cat": "coches",
+   "file": "Lexus logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Lexus.svg"
+  },
+  "mini": {
+   "name": "MINI",
+   "cat": "coches",
+   "file": "MINI logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/e9/MINI_logo.svg"
+  },
+  "vw": {
+   "name": "Volkswagen",
+   "cat": "coches",
+   "file": "Volkswagen logo 2019.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Volkswagen_logo_2019.svg"
+  },
+  "subaru": {
+   "name": "Subaru",
+   "cat": "coches",
+   "file": "Subaru logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Subaru_logo.svg"
+  },
+  "mitsubishi": {
+   "name": "Mitsubishi",
+   "cat": "coches",
+   "file": "Mitsubishi logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Mitsubishi_logo.svg"
+  },
+  "bugatti": {
+   "name": "Bugatti",
+   "cat": "coches",
+   "file": "Bugatti logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Bugatti_logo.svg"
+  },
+  "koenigsegg": {
+   "name": "Koenigsegg",
+   "cat": "coches",
+   "file": "Koenigsegg logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/39/Koenigsegg_logo.svg"
+  },
+  "dallara": {
+   "name": "Dallara",
+   "cat": "coches",
+   "file": "Dallara logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Dallara_logo.svg"
+  },
+  "repsol": {
+   "name": "Repsol",
+   "cat": "lubricantes",
+   "file": "Repsol logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Repsol_logo.svg"
+  },
+  "petronas": {
+   "name": "Petronas",
+   "cat": "lubricantes",
+   "file": "Petronas Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Petronas_Logo.svg"
+  },
+  "motul": {
+   "name": "Motul",
+   "cat": "lubricantes",
+   "file": "Motul logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Motul_logo.svg"
+  },
+  "texaco": {
+   "name": "Texaco",
+   "cat": "lubricantes",
+   "file": "Texaco logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Texaco_logo.svg"
+  },
+  "exxonmobil": {
+   "name": "ExxonMobil",
+   "cat": "lubricantes",
+   "file": "ExxonMobil Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/0/09/ExxonMobil_Logo.svg"
+  },
+  "bridgestone": {
+   "name": "Bridgestone",
+   "cat": "neumaticos",
+   "file": "Bridgestone logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Bridgestone_logo.svg"
+  },
+  "continental": {
+   "name": "Continental",
+   "cat": "neumaticos",
+   "file": "Continental logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Continental_logo.svg"
+  },
+  "falken": {
+   "name": "Falken",
+   "cat": "neumaticos",
+   "file": "Falken Tire logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Falken_Tire_logo.svg"
+  },
+  "toyo": {
+   "name": "Toyo Tires",
+   "cat": "neumaticos",
+   "file": "Toyo Tire logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/b7/Toyo_Tire_logo.svg"
+  },
+  "bfgoodrich": {
+   "name": "BFGoodrich",
+   "cat": "neumaticos",
+   "file": "BFGoodrich logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/9/90/BFGoodrich_logo.svg"
+  },
+  "hankook": {
+   "name": "Hankook",
+   "cat": "neumaticos",
+   "file": "Hankook Tire logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Hankook_Tire_logo.svg"
+  },
+  "asus": {
+   "name": "ASUS",
+   "cat": "pc",
+   "file": "ASUS Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg"
+  },
+  "gigabyte": {
+   "name": "Gigabyte",
+   "cat": "pc",
+   "file": "Gigabyte Technology logo 20080107.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Gigabyte_Technology_logo_20080107.svg"
+  },
+  "samsung": {
+   "name": "Samsung",
+   "cat": "pc",
+   "file": "Samsung Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/61/Samsung_old_logo_before_year_2015.svg"
+  },
+  "lg": {
+   "name": "LG",
+   "cat": "pc",
+   "file": "LG logo (2015).svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/LG_logo_%282014%29.svg"
+  },
+  "benq": {
+   "name": "BenQ",
+   "cat": "pc",
+   "file": "BenQ-Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/6c/BenQ-Logo.svg"
+  },
+  "hp": {
+   "name": "HP",
+   "cat": "pc",
+   "file": "HP logo 2012.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg"
+  },
+  "dell": {
+   "name": "Dell",
+   "cat": "pc",
+   "file": "Dell Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/48/Dell_Logo.svg"
+  },
+  "microsoft": {
+   "name": "Microsoft",
+   "cat": "pc",
+   "file": "Microsoft logo (2012).svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg"
+  },
+  "meta": {
+   "name": "Meta",
+   "cat": "pc",
+   "file": "Meta Platforms Inc. logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg"
+  },
+  "twitch": {
+   "name": "Twitch",
+   "cat": "pc",
+   "file": "Twitch logo 2019.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Twitch_logo_2019.svg"
+  },
+  "youtube": {
+   "name": "YouTube",
+   "cat": "pc",
+   "file": "YouTube Logo 2017.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg"
+  },
+  "gopro": {
+   "name": "GoPro",
+   "cat": "pc",
+   "file": "GoPro logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/GoPro_logo.svg"
+  },
+  "bbs": {
+   "name": "BBS",
+   "cat": "tecnica",
+   "file": "BBS logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/BBS_logo.svg"
+  },
+  "sachs": {
+   "name": "Sachs",
+   "cat": "tecnica",
+   "file": "ZF Sachs logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/ZF_Sachs_logo.svg"
+  },
+  "hella": {
+   "name": "Hella",
+   "cat": "tecnica",
+   "file": "Hella Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Hella_Logo.svg"
+  },
+  "denso": {
+   "name": "Denso",
+   "cat": "tecnica",
+   "file": "Denso logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Denso_logo.svg"
+  },
+  "mahle": {
+   "name": "Mahle",
+   "cat": "tecnica",
+   "file": "Mahle logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Mahle_logo.svg"
+  },
+  "wurth": {
+   "name": "Würth",
+   "cat": "tecnica",
+   "file": "Würth logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/W%C3%BCrth_logo.svg"
+  },
+  "snapon": {
+   "name": "Snap-on",
+   "cat": "tecnica",
+   "file": "Snap-on logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/Snap-on_logo.svg"
+  },
+  "cocacola": {
+   "name": "Coca-Cola",
+   "cat": "bebidas",
+   "file": "Coca-Cola logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg"
+  },
+  "pepsi": {
+   "name": "Pepsi",
+   "cat": "bebidas",
+   "file": "Pepsi logo 2014.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Pepsi_logo_2014.svg"
+  },
+  "heineken": {
+   "name": "Heineken",
+   "cat": "bebidas",
+   "file": "Heineken logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Heineken_logo.svg"
+  },
+  "martini": {
+   "name": "Martini",
+   "cat": "bebidas",
+   "file": "Martini Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/Martini_Logo.svg"
+  },
+  "santander": {
+   "name": "Santander",
+   "cat": "sponsors",
+   "file": "Banco Santander Logotipo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Banco_Santander_Logotipo.svg"
+  },
+  "vodafone": {
+   "name": "Vodafone",
+   "cat": "sponsors",
+   "file": "Vodafone logo 2017.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Vodafone_logo_2017.svg"
+  },
+  "orange": {
+   "name": "Orange",
+   "cat": "sponsors",
+   "file": "Orange logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg"
+  },
+  "movistar": {
+   "name": "Movistar",
+   "cat": "sponsors",
+   "file": "Movistar 2020 logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Movistar_2020_logo.svg"
+  },
+  "telefonica": {
+   "name": "Telefónica",
+   "cat": "sponsors",
+   "file": "Telefonica Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/25/Telefonica_Logo.svg"
+  },
+  "mapfre": {
+   "name": "Mapfre",
+   "cat": "sponsors",
+   "file": "Mapfre logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Mapfre_logo.svg"
+  },
+  "dhl": {
+   "name": "DHL",
+   "cat": "sponsors",
+   "file": "DHL Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/ac/DHL_Logo.svg"
+  },
+  "ups": {
+   "name": "UPS",
+   "cat": "sponsors",
+   "file": "UPS Logo Shield 2017.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/UPS_Logo_Shield_2017.svg"
+  },
+  "emirates": {
+   "name": "Emirates",
+   "cat": "sponsors",
+   "file": "Emirates logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Emirates_logo.svg"
+  },
+  "qatarairways": {
+   "name": "Qatar Airways",
+   "cat": "sponsors",
+   "file": "Qatar Airways logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Qatar_Airways_logo.svg"
+  },
+  "tagheuer": {
+   "name": "TAG Heuer",
+   "cat": "sponsors",
+   "file": "TAG Heuer Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/d/de/TAG_Heuer_Logo.svg"
+  },
+  "casio": {
+   "name": "Casio",
+   "cat": "sponsors",
+   "file": "Casio logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Casio_logo.svg"
+  },
+  "adidas": {
+   "name": "Adidas",
+   "cat": "sponsors",
+   "file": "Adidas Logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg"
+  },
+  "nike": {
+   "name": "Nike",
+   "cat": "sponsors",
+   "file": "Logo NIKE.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
+  },
+  "oakley": {
+   "name": "Oakley",
+   "cat": "sponsors",
+   "file": "Oakley logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Oakley_logo.svg"
+  },
+  "visa": {
+   "name": "Visa",
+   "cat": "sponsors",
+   "file": "Visa Inc. logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/9/98/Visa_Inc._logo_%282005%E2%80%932014%29.svg"
+  },
+  "mastercard": {
+   "name": "Mastercard",
+   "cat": "sponsors",
+   "file": "Mastercard-logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+  },
+  "allianz": {
+   "name": "Allianz",
+   "cat": "sponsors",
+   "file": "Allianz logo.svg",
+   "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Allianz_logo.svg"
+  }
+ },
+ "searched": {
+  "ferrari": {
+   "name": "Ferrari",
+   "cat": "coches",
+   "query": "Ferrari logo",
+   "hits": [
+    "Ferrari World Abu Dhabi logo.svg",
+    "Ferrari wordmark.svg",
+    "Ferrari (2023 film) wordmark.svg",
+    "Ferrari Testarossa.svg",
+    "Horse clipart.svg"
+   ]
+  },
+  "astonmartin": {
+   "name": "Aston Martin",
+   "cat": "coches",
+   "query": "Aston Martin logo",
+   "hits": [
+    "Aston Martin 1935.svg",
+    "Aston Martin 1920.svg",
+    "Aston Martin wordmark.svg",
+    "Aston Martin DB5.svg",
+    "BWT Racing Point Logo.svg"
+   ]
+  },
+  "cadillac": {
+   "name": "Cadillac",
+   "cat": "coches",
+   "query": "Cadillac crest",
+   "hits": []
+  },
+  "bentley": {
+   "name": "Bentley",
+   "cat": "coches",
+   "query": "Bentley wings",
+   "hits": []
+  },
+  "jaguar": {
+   "name": "Jaguar",
+   "cat": "coches",
+   "query": "Jaguar cars",
+   "hits": [
+    "Jaguar 1966 logo.svg",
+    "Jaguar 1965 logo.svg",
+    "Jaguar 1979 logo.svg",
+    "Jaguar 2001 wordmark.svg",
+    "Jaguar 1982 wordmark.svg"
+   ]
+  },
+  "alfaromeo": {
+   "name": "Alfa Romeo",
+   "cat": "coches",
+   "query": "Alfa Romeo logo",
+   "hits": [
+    "Alfa Romeo Giulietta - logo wordmark (Italy, 2010).svg",
+    "Alfa Romeo 4C - logo wordmark (Italy, 2015).svg",
+    "Alfa Romeo MiTo - logo wordmark (Italy, 2016).svg",
+    "Alfa Romeo Giulietta - logo wordmark (Italy, 2014).svg",
+    "Alfa Romeo MiTo - logo wordmark (Italy, 2008).svg"
+   ]
+  },
+  "skoda": {
+   "name": "Škoda",
+   "cat": "coches",
+   "query": "Skoda auto",
+   "hits": [
+    "Skoda-Auto-Logo-2011-present.svg",
+    "Škoda Auto 2022 text logo.svg",
+    "Octavia-logo.svg",
+    "Škoda Auto.svg",
+    "Logo-black-cs.svg"
+   ]
+  },
+  "lotus": {
+   "name": "Lotus",
+   "cat": "coches",
+   "query": "Lotus cars roundel",
+   "hits": []
+  },
+  "pagani": {
+   "name": "Pagani",
+   "cat": "coches",
+   "query": "Pagani automobili",
+   "hits": []
+  },
+  "ligier": {
+   "name": "Ligier",
+   "cat": "coches",
+   "query": "Ligier",
+   "hits": [
+    "Logo Ligier.svg",
+    "Blason Fr famille Ligier (Bayonne).svg",
+    "Blason-argent-croix-ancrée-sable.svg",
+    "Blason ville fr Génicourt-sur-Meuse (Meuse).svg"
+   ]
+  },
+  "radical": {
+   "name": "Radical",
+   "cat": "coches",
+   "query": "Radical sportscars",
+   "hits": []
+  },
+  "ginetta": {
+   "name": "Ginetta",
+   "cat": "coches",
+   "query": "Ginetta cars",
+   "hits": []
+  },
+  "shell": {
+   "name": "Shell",
+   "cat": "lubricantes",
+   "query": "Shell pecten",
+   "hits": []
+  },
+  "mobil1": {
+   "name": "Mobil 1",
+   "cat": "lubricantes",
+   "query": "Mobil 1",
+   "hits": [
+    "Mobil logo.svg",
+    "Flag of Mobil Corporation.svg",
+    "Mobil-logo.svg",
+    "BKK Mobil Oil logo.svg",
+    "Flag of Socony Mobil Co.svg"
+   ]
+  },
+  "totalenergies": {
+   "name": "TotalEnergies",
+   "cat": "lubricantes",
+   "query": "TotalEnergies logo",
+   "hits": [
+    "TotalEnergies wordmark (2021-present).svg",
+    "Total 1980 logo.svg",
+    "Logo Elan.svg",
+    "Total wordmark (2003-2021).svg",
+    "Elf brand textlogo.svg"
+   ]
+  },
+  "elf": {
+   "name": "Elf",
+   "cat": "lubricantes",
+   "query": "Elf aquitaine",
+   "hits": [
+    "Elf Aquitaine svg.svg",
+    "Elf brand textlogo.svg"
+   ]
+  },
+  "valvoline": {
+   "name": "Valvoline",
+   "cat": "lubricantes",
+   "query": "Valvoline",
+   "hits": [
+    "Valvoline company logo.svg"
+   ]
+  },
+  "liquimoly": {
+   "name": "Liqui Moly",
+   "cat": "lubricantes",
+   "query": "Liqui Moly",
+   "hits": [
+    "Liqui-moly.svg"
+   ]
+  },
+  "bp": {
+   "name": "BP",
+   "cat": "lubricantes",
+   "query": "BP logo",
+   "hits": [
+    "Castrol logo 2023.svg",
+    "Logo BP Migas (2005).svg",
+    "PKO BP logo 2026.svg",
+    "PKO BP logo no-background 2026.svg",
+    "Logo BP Bintan.svg"
+   ]
+  },
+  "sunoco": {
+   "name": "Sunoco",
+   "cat": "lubricantes",
+   "query": "Sunoco",
+   "hits": [
+    "Sunoco 1999 logo.svg",
+    "Sunoco 1954 logo.svg"
+   ]
+  },
+  "pennzoil": {
+   "name": "Pennzoil",
+   "cat": "lubricantes",
+   "query": "Pennzoil",
+   "hits": []
+  },
+  "vpracing": {
+   "name": "VP Racing",
+   "cat": "lubricantes",
+   "query": "VP Racing Fuels",
+   "hits": []
+  },
+  "stp": {
+   "name": "STP",
+   "cat": "lubricantes",
+   "query": "STP oil",
+   "hits": []
+  },
+  "cepsa": {
+   "name": "Cepsa",
+   "cat": "lubricantes",
+   "query": "Cepsa",
+   "hits": [
+    "Cepsa.svg",
+    "Moeve logo.svg",
+    "DEPASO.svg"
+   ]
+  },
+  "firestone": {
+   "name": "Firestone",
+   "cat": "neumaticos",
+   "query": "Firestone logo",
+   "hits": [
+    "Flag of Firestone, Colorado.svg",
+    "Firestone.svg",
+    "National Patriotic Front of Liberia Scorpion Logo.svg"
+   ]
+  },
+  "yokohama": {
+   "name": "Yokohama",
+   "cat": "neumaticos",
+   "query": "Yokohama rubber",
+   "hits": [
+    "Yokohama (Unternehmen) logo.svg",
+    "Nankang Rubber Tire logo.svg"
+   ]
+  },
+  "dunlop": {
+   "name": "Dunlop",
+   "cat": "neumaticos",
+   "query": "Dunlop tyres",
+   "hits": [
+    "Dunlop Aircraft Tyres Limited.svg",
+    "Logo-dunlop.svg",
+    "Dt logo.svg"
+   ]
+  },
+  "kumho": {
+   "name": "Kumho",
+   "cat": "neumaticos",
+   "query": "Kumho tire",
+   "hits": [
+    "Kumho Tire wordmark (2006).svg",
+    "Kumho Tire logo (2023).svg"
+   ]
+  },
+  "goodyear": {
+   "name": "Goodyear",
+   "cat": "neumaticos",
+   "query": "Goodyear wingfoot",
+   "hits": []
+  },
+  "corsair": {
+   "name": "Corsair",
+   "cat": "pc",
+   "query": "Corsair gaming",
+   "hits": []
+  },
+  "razer": {
+   "name": "Razer",
+   "cat": "pc",
+   "query": "Razer",
+   "hits": [
+    "Razer wordmark.svg",
+    "Raze.svg",
+    "Blason ville fr Bellegarde-du-Razès.svg",
+    "Blason ville fr Fenouillet-du-Razès (Aude).svg",
+    "Blason ville fr Razès (Haute-Vienne).svg"
+   ]
+  },
+  "rog": {
+   "name": "ROG (ASUS)",
+   "cat": "pc",
+   "query": "Republic of Gamers",
+   "hits": [
+    "ASUS ROG 2007 logo.svg",
+    "Level Magazine logo.svg",
+    "Indonesia Game Rating System 2024 logo.svg",
+    "2K Czech Logo.svg",
+    "Philippine Amusement and Gaming Corporation (PAGCOR).svg"
+   ]
+  },
+  "msi": {
+   "name": "MSI",
+   "cat": "pc",
+   "query": "Micro-Star International",
+   "hits": [
+    "Micro-Star International logo2020.svg",
+    "Micro-Star International logo.svg",
+    "Logo MicroStarInternational.svg",
+    "MicroStarInternational.svg",
+    "MSI Barcode.svg"
+   ]
+  },
+  "discord": {
+   "name": "Discord",
+   "cat": "pc",
+   "query": "Discord wordmark",
+   "hits": [
+    "Linux Mint Debian Edition.svg"
+   ]
+  },
+  "nzxt": {
+   "name": "NZXT",
+   "cat": "pc",
+   "query": "NZXT",
+   "hits": [
+    "Logo NZXT.svg",
+    "Picsart (software company) logo.svg"
+   ]
+  },
+  "iracing": {
+   "name": "iRacing",
+   "cat": "simhw",
+   "query": "iRacing",
+   "hits": [
+    "Campos Racing logo with white letters.svg",
+    "Campos Racing logo with black letters.svg",
+    "CFD Logo CFD 2024 Logo CFD.svg",
+    "RED BULL LOGO 2026.svg",
+    "Ralliart Logo.svg"
+   ]
+  },
+  "ozracing": {
+   "name": "OZ Racing",
+   "cat": "tecnica",
+   "query": "OZ wheels",
+   "hits": []
+  },
+  "enkei": {
+   "name": "Enkei",
+   "cat": "tecnica",
+   "query": "Enkei wheels",
+   "hits": []
+  },
+  "rays": {
+   "name": "Rays / Volk",
+   "cat": "tecnica",
+   "query": "Rays wheels Volk",
+   "hits": []
+  },
+  "apracing": {
+   "name": "AP Racing",
+   "cat": "tecnica",
+   "query": "AP Racing",
+   "hits": [
+    "AP Racing 2026.svg",
+    "NewJeans logo - Super Shy.svg",
+    "NewJeans logo - Supernatural.svg"
+   ]
+  },
+  "bilstein": {
+   "name": "Bilstein",
+   "cat": "tecnica",
+   "query": "Bilstein",
+   "hits": [
+    "Bilstein Logo.svg"
+   ]
+  },
+  "eibach": {
+   "name": "Eibach",
+   "cat": "tecnica",
+   "query": "Eibach springs",
+   "hits": []
+  },
+  "ohlins": {
+   "name": "Öhlins",
+   "cat": "tecnica",
+   "query": "Ohlins",
+   "hits": [
+    "Oehlins logo.svg"
+   ]
+  },
+  "zf": {
+   "name": "ZF",
+   "cat": "tecnica",
+   "query": "ZF Friedrichshafen",
+   "hits": [
+    "ZF logo STD Blue 3CC.svg",
+    "ZF Friedrichshafen logo.svg",
+    "ZF Sachs logo.svg",
+    "ZF Lenksysteme.svg",
+    "ZF Official Logo.svg"
+   ]
+  },
+  "kn": {
+   "name": "K&N",
+   "cat": "tecnica",
+   "query": "K&N filters",
+   "hits": [
+    "Multirate upsampling (interpolation) filter.svg",
+    "Spectral leakage caused by \"windowing\".svg"
+   ]
+  },
+  "garrett": {
+   "name": "Garrett",
+   "cat": "tecnica",
+   "query": "Garrett turbo",
+   "hits": []
+  },
+  "borla": {
+   "name": "Borla",
+   "cat": "tecnica",
+   "query": "Borla exhaust",
+   "hits": []
+  },
+  "magnaflow": {
+   "name": "MagnaFlow",
+   "cat": "tecnica",
+   "query": "MagnaFlow",
+   "hits": []
+  },
+  "schuberth": {
+   "name": "Schuberth",
+   "cat": "seguridad",
+   "query": "Schuberth",
+   "hits": [
+    "Schuberth-logo.svg"
+   ]
+  },
+  "simpson": {
+   "name": "Simpson",
+   "cat": "seguridad",
+   "query": "Simpson racing helmets",
+   "hits": []
+  },
+  "estrella": {
+   "name": "Estrella Galicia",
+   "cat": "bebidas",
+   "query": "Estrella Galicia",
+   "hits": [
+    "Estrella Galicia escudo color vectorial HDJR.svg",
+    "Estrella Galiza tapa de botella A Coruña.svg",
+    "Estrela Galiza.svg"
+   ]
+  },
+  "mahou": {
+   "name": "Mahou",
+   "cat": "bebidas",
+   "query": "Mahou cerveza",
+   "hits": []
+  },
+  "jagermeister": {
+   "name": "Jägermeister",
+   "cat": "bebidas",
+   "query": "Jagermeister",
+   "hits": []
+  },
+  "fedex": {
+   "name": "FedEx",
+   "cat": "sponsors",
+   "query": "FedEx logo",
+   "hits": [
+    "FedEx Corporation - 2016 Logo.svg",
+    "FedEx Office Logo.svg",
+    "FedEx Express.svg",
+    "FedEx Kinko's - 2004 Logo.svg",
+    "FedEx Kinkos - Transition Logo.svg"
+   ]
+  },
+  "rolex": {
+   "name": "Rolex",
+   "cat": "sponsors",
+   "query": "Rolex crown",
+   "hits": []
+  },
+  "puma": {
+   "name": "Puma",
+   "cat": "sponsors",
+   "query": "Puma sportswear",
+   "hits": []
+  },
+  "cryptocom": {
+   "name": "Crypto.com",
+   "cat": "sponsors",
+   "query": "Crypto.com",
+   "hits": [
+    "Easy Crypto Logo.svg",
+    "Ethereum logo 2014.svg",
+    "Cryptocat logo new.svg",
+    "Nueva Esparta Mapa Vial.svg",
+    "Armoiries de María Margarita Vargas Santaella.svg"
+   ]
+  }
+ }
+}

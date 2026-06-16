@@ -1,0 +1,18 @@
+# Build / dist
+dist/
+*.zip
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Claude / agente local
+.claude/
+
+# Referencias internas (DOM dumps, no son código)
+reference/
