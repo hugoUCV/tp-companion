@@ -213,22 +213,83 @@ $("#board-file").addEventListener("change", async (e) => {
 // AI DECAL GENERATOR
 // ============================================================
 const AI_STYLES = [
-  { label: "Racing livery",    prompt: "racing livery graphic, bold geometry, motorsport" },
-  { label: "Retro sponsor",    prompt: "retro 80s sponsor logo, vintage racing, distressed print" },
-  { label: "Dragón",           prompt: "dragon, detailed scales, fierce, symmetrical" },
-  { label: "Neon eléctrico",   prompt: "neon lightning bolt, glowing electric, dark background" },
-  { label: "Fuego y llamas",   prompt: "fire and flames, hot rod style, orange red" },
-  { label: "Tribal",           prompt: "tribal tattoo style, black angular shapes, symmetric" },
-  { label: "Emblema cromo",    prompt: "metallic chrome emblem, 3D shiny, luxury" },
-  { label: "Skull racing",     prompt: "skull with racing helmet, aggressive, detailed" },
-  { label: "Anime / cómic",    prompt: "anime style illustration, bold outlines, dynamic" },
-  { label: "Graffiti",         prompt: "graffiti spray paint tag, urban street art style" },
+  { label: "Racing livery",  prompt: "racing livery graphic, bold geometry, motorsport" },
+  { label: "Retro sponsor",  prompt: "retro 80s sponsor logo, vintage racing, distressed print" },
+  { label: "Dragón",         prompt: "dragon, detailed scales, fierce, symmetrical" },
+  { label: "Neon eléctrico", prompt: "neon lightning bolt, glowing electric, dark background" },
+  { label: "Fuego y llamas", prompt: "fire and flames, hot rod style, orange red" },
+  { label: "Tribal",         prompt: "tribal tattoo style, black angular shapes, symmetric" },
+  { label: "Emblema cromo",  prompt: "metallic chrome emblem, 3D shiny, luxury" },
+  { label: "Skull racing",   prompt: "skull with racing helmet, aggressive, detailed" },
+  { label: "Anime / cómic",  prompt: "anime style illustration, bold outlines, dynamic" },
+  { label: "Graffiti",       prompt: "graffiti spray paint tag, urban street art style" },
 ];
+
+const VECTOR_SUFFIX = "flat vector sticker art, bold black outlines, solid flat fill colors, no gradients, no shadows, no noise, no texture, adobe illustrator clipart style, die-cut sticker, svg vector, crisp clean edges, limited color palette, white background";
 
 let aiDataUrl = null;
 let aiSeed = null;
 
+function colorDistSq(a, b) {
+  const dr = a[0] - b[0], dg = a[1] - b[1], db = a[2] - b[2];
+  return dr * dr + dg * dg + db * db;
+}
+
+async function quantizeColors(dataUrl, k) {
+  const img = await loadImage(dataUrl);
+  const canvas = document.createElement("canvas");
+  canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+  const id = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const data = id.data;
+  const total = data.length / 4;
+
+  // Sample every 8th opaque pixel for k-means training
+  const samples = [];
+  for (let i = 0; i < total; i += 8) {
+    if (data[i * 4 + 3] > 20) samples.push([data[i * 4], data[i * 4 + 1], data[i * 4 + 2]]);
+  }
+  if (!samples.length) return dataUrl;
+
+  // Init centroids evenly spread across samples
+  const step = Math.max(1, Math.floor(samples.length / k));
+  let centroids = Array.from({ length: k }, (_, i) => [...samples[Math.min(i * step, samples.length - 1)]]);
+
+  // K-means — 20 iterations
+  for (let iter = 0; iter < 20; iter++) {
+    const sums = Array.from({ length: k }, () => [0, 0, 0, 0]); // r,g,b,count
+    for (const px of samples) {
+      let best = 0, bestD = Infinity;
+      for (let j = 0; j < k; j++) { const d = colorDistSq(px, centroids[j]); if (d < bestD) { bestD = d; best = j; } }
+      sums[best][0] += px[0]; sums[best][1] += px[1]; sums[best][2] += px[2]; sums[best][3]++;
+    }
+    let changed = false;
+    for (let j = 0; j < k; j++) {
+      if (!sums[j][3]) continue;
+      const nc = [Math.round(sums[j][0] / sums[j][3]), Math.round(sums[j][1] / sums[j][3]), Math.round(sums[j][2] / sums[j][3])];
+      if (colorDistSq(nc, centroids[j]) > 1) changed = true;
+      centroids[j] = nc;
+    }
+    if (!changed) break;
+  }
+
+  // Apply palette to every opaque pixel
+  for (let i = 0; i < total; i++) {
+    const o = i * 4;
+    if (data[o + 3] <= 20) continue;
+    const px = [data[o], data[o + 1], data[o + 2]];
+    let best = 0, bestD = Infinity;
+    for (let j = 0; j < k; j++) { const d = colorDistSq(px, centroids[j]); if (d < bestD) { bestD = d; best = j; } }
+    data[o] = centroids[best][0]; data[o + 1] = centroids[best][1]; data[o + 2] = centroids[best][2];
+  }
+
+  ctx.putImageData(id, 0, 0);
+  return canvas.toDataURL("image/png");
+}
+
 (function initAI() {
+  // Style chips
   const chips = document.getElementById("ai-chips");
   AI_STYLES.forEach(({ label, prompt }) => {
     const c = document.createElement("button");
@@ -236,42 +297,56 @@ let aiSeed = null;
     c.addEventListener("click", () => {
       const ta = document.getElementById("ai-prompt");
       const cur = ta.value.trim();
-      if (cur.includes(prompt)) return;
+      if (cur.includes(prompt)) { c.classList.remove("active"); ta.value = cur.replace(", " + prompt, "").replace(prompt, "").trim(); return; }
       ta.value = cur ? cur + ", " + prompt : prompt;
       c.classList.add("active");
     });
     chips.appendChild(c);
   });
 
+  // Optimizar para vector
+  document.getElementById("ai-perfect-prompt").addEventListener("click", () => {
+    const ta = document.getElementById("ai-prompt");
+    const cur = ta.value.trim();
+    if (!cur) return toast("Escribe una descripción primero", true);
+    if (cur.includes(VECTOR_SUFFIX)) return toast("El prompt ya está optimizado");
+    ta.value = cur + ", " + VECTOR_SUFFIX;
+    toast("Prompt mejorado para estilo vector");
+  });
+
+  // Seed random
   document.getElementById("ai-seed-rnd").addEventListener("click", () => {
     document.getElementById("ai-seed").value = Math.floor(Math.random() * 9999999) + 1;
   });
 
+  // Generate
   document.getElementById("ai-generate").addEventListener("click", async () => {
     const promptVal = document.getElementById("ai-prompt").value.trim();
     if (!promptVal) return toast("Escribe una descripción primero", true);
 
+    const isVectorMode = document.getElementById("ai-mode-vector").checked;
     const model   = document.getElementById("ai-model").value;
     const size    = document.getElementById("ai-size").value;
     const seedInp = document.getElementById("ai-seed").value;
     aiSeed = seedInp ? parseInt(seedInp) : Math.floor(Math.random() * 9999999) + 1;
 
-    const fullPrompt = promptVal + ", isolated on white, clean edges, vector art style, high detail";
+    const baseSuffix = isVectorMode ? VECTOR_SUFFIX : "isolated on white, clean edges, high detail";
+    const fullPrompt = promptVal.includes(VECTOR_SUFFIX) ? promptVal : promptVal + ", " + baseSuffix;
     const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=${size}&height=${size}&nologo=true&model=${model}&seed=${aiSeed}`;
 
-    const btnGen   = document.getElementById("ai-generate");
-    const progress = document.getElementById("ai-progress");
-    const progText = document.getElementById("ai-progress-text");
+    const btnGen    = document.getElementById("ai-generate");
+    const progress  = document.getElementById("ai-progress");
+    const progText  = document.getElementById("ai-progress-text");
     const resultImg = document.getElementById("ai-result-img");
     const placeholder = document.getElementById("ai-placeholder");
-    const actions = document.getElementById("ai-actions");
-    const meta    = document.getElementById("ai-result-meta");
+    const actions   = document.getElementById("ai-actions");
+    const meta      = document.getElementById("ai-result-meta");
 
     btnGen.disabled = true;
     progress.hidden = false;
     resultImg.hidden = true;
     placeholder.style.display = "";
-    placeholder.querySelector("div:last-child").textContent = "El decal generado aparecerá aquí";
+    placeholder.querySelector("div:last-child").textContent = "Generando, espera…";
     actions.hidden = true;
     meta.hidden = true;
     aiDataUrl = null;
@@ -284,25 +359,27 @@ let aiSeed = null;
       const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const blob = await res.blob();
-      const dataUrl = await new Promise((ok, err) => {
-        const r = new FileReader();
-        r.onload = () => ok(r.result);
-        r.onerror = err;
-        r.readAsDataURL(blob);
+      aiDataUrl = await new Promise((ok, err) => {
+        const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = err; r.readAsDataURL(blob);
       });
 
-      aiDataUrl = dataUrl;
-      if (document.getElementById("ai-auto-bg").checked) {
+      if (document.getElementById("ai-auto-bg").checked) aiDataUrl = await removeWhiteBg(aiDataUrl);
+      if (isVectorMode) {
+        progText.textContent = "Vectorizando…";
+        progress.hidden = false;
+        const k = Math.max(2, Math.min(24, parseInt(document.getElementById("ai-color-k").value) || 6));
+        aiDataUrl = await quantizeColors(aiDataUrl, k);
         aiDataUrl = await removeWhiteBg(aiDataUrl);
       }
 
       resultImg.src = aiDataUrl;
       resultImg.hidden = false;
       placeholder.style.display = "none";
-      meta.textContent = `Semilla: ${aiSeed}  ·  Modelo: ${model}  ·  ${size}×${size} px`;
+      const modeLabel = isVectorMode ? "  ·  Modo Vector" : "";
+      meta.textContent = `Semilla: ${aiSeed}  ·  Modelo: ${model}  ·  ${size}×${size} px${modeLabel}`;
       meta.hidden = false;
       actions.hidden = false;
-      toast("Decal generado");
+      toast(isVectorMode ? "Decal generado en modo vector" : "Decal generado");
     } catch (e) {
       placeholder.querySelector("div:last-child").textContent = "Error al generar. Inténtalo de nuevo.";
       toast("No se pudo conectar con la IA. Revisa tu conexión.", true);
@@ -310,6 +387,21 @@ let aiSeed = null;
       clearInterval(msgInterval);
       progress.hidden = true;
       btnGen.disabled = false;
+    }
+  });
+
+  // Vectorizar post-generación
+  document.getElementById("ai-vectorize").addEventListener("click", async () => {
+    if (!aiDataUrl) return toast("Genera un decal primero", true);
+    const k = Math.max(2, Math.min(24, parseInt(document.getElementById("ai-color-k").value) || 6));
+    const btnVec = document.getElementById("ai-vectorize");
+    btnVec.disabled = true; btnVec.textContent = "Vectorizando…";
+    try {
+      aiDataUrl = await quantizeColors(aiDataUrl, k);
+      document.getElementById("ai-result-img").src = aiDataUrl;
+      toast(`Paleta reducida a ${k} colores planos`);
+    } finally {
+      btnVec.disabled = false; btnVec.textContent = "🎨 Vectorizar";
     }
   });
 
@@ -324,7 +416,6 @@ let aiSeed = null;
 
   document.getElementById("ai-taller").addEventListener("click", () => {
     if (!aiDataUrl) return;
-    workOriginal = aiDataUrl;
     setWork(aiDataUrl, true);
     showView("logos");
     toast("Abierto en el Taller de logos");
@@ -350,8 +441,7 @@ let aiSeed = null;
 
   document.getElementById("ai-dl").addEventListener("click", () => {
     if (!aiDataUrl) return;
-    const a = document.createElement("a");
-    a.href = aiDataUrl; a.download = `decal_ai_${aiSeed}.png`; a.click();
+    const a = document.createElement("a"); a.href = aiDataUrl; a.download = `decal_ai_${aiSeed}.png`; a.click();
   });
 })();
 

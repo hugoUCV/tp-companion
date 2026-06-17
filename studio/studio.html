@@ -156,7 +156,7 @@
       <div class="ai-layout">
         <div class="ai-controls">
           <div class="field">
-            <label>Descripción</label>
+            <label>Descripción <button id="ai-perfect-prompt" class="btn xs" type="button" title="Añade descriptores de estilo vector al prompt">🪄 Optimizar para vector</button></label>
             <textarea id="ai-prompt" rows="4" placeholder="Ej: dragón rojo sobre fondo negro, estilo tribal, detallado, simétrico…"></textarea>
           </div>
           <div class="field">
@@ -185,9 +185,15 @@
               <input id="ai-seed" type="number" min="1" max="9999999" placeholder="aleatoria" style="width:100%" />
             </div>
           </div>
-          <div class="check ai-bg-check">
-            <input type="checkbox" id="ai-auto-bg" />
-            <label for="ai-auto-bg">Quitar fondo automáticamente tras generar</label>
+          <div class="ai-toggles">
+            <label class="ai-toggle-row">
+              <input type="checkbox" id="ai-mode-vector" />
+              <span class="ai-toggle-label">Modo Vector <span class="ai-toggle-sub">prompt + auto-vectorizar</span></span>
+            </label>
+            <label class="ai-toggle-row">
+              <input type="checkbox" id="ai-auto-bg" />
+              <span class="ai-toggle-label">Quitar fondo tras generar</span>
+            </label>
           </div>
           <button id="ai-generate" class="btn primary full" style="margin-top:14px">✨ Generar decal</button>
           <div id="ai-progress" class="ai-progress" hidden>
@@ -206,11 +212,19 @@
           </div>
           <div id="ai-result-meta" class="muted ai-meta" hidden></div>
           <div id="ai-actions" class="ai-actions" hidden>
-            <button id="ai-removebg" class="btn">Quitar fondo</button>
-            <button id="ai-taller" class="btn">🪄 Abrir en Taller</button>
-            <button id="ai-save" class="btn">💾 Guardar en logos</button>
-            <button id="ai-tp" class="btn primary">➕ Enviar a TP</button>
-            <button id="ai-dl" class="btn ghost">⬇ Descargar PNG</button>
+            <div class="ai-vec-row">
+              <button id="ai-vectorize" class="btn ai-vec-btn" type="button" title="Reduce la imagen a colores planos (estilo Illustrator)">🎨 Vectorizar</button>
+              <label class="ai-vec-k-label">Colores
+                <input id="ai-color-k" type="number" min="2" max="24" value="6" class="ai-color-k-inp" />
+              </label>
+            </div>
+            <div class="ai-act-row">
+              <button id="ai-removebg" class="btn">Quitar fondo</button>
+              <button id="ai-taller" class="btn">🪄 Abrir en Taller</button>
+              <button id="ai-save" class="btn">💾 Guardar en logos</button>
+              <button id="ai-tp" class="btn primary">➕ Enviar a TP</button>
+              <button id="ai-dl" class="btn ghost">⬇ Descargar PNG</button>
+            </div>
           </div>
         </div>
       </div>
