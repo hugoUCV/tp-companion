@@ -288,6 +288,35 @@ async function quantizeColors(dataUrl, k) {
   return canvas.toDataURL("image/png");
 }
 
+async function imageToSVG(dataUrl, k) {
+  return new Promise((resolve, reject) => {
+    setTimeout(async () => {
+      try {
+        const img = await loadImage(dataUrl);
+        const canvas = document.createElement("canvas");
+        canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        const imgd = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const svg = window.ImageTracer.getsvgstring(imgd, {
+          ltres: 1, qtres: 1,
+          pathomit: 8,
+          rightangleenhance: true,
+          colorsampling: 2,
+          numberofcolors: Math.max(2, k),
+          mincolorratio: 0,
+          colorquantcycles: 3,
+          strokewidth: 0,
+          blurradius: 0, blurdelta: 20,
+          viewbox: true, desc: false,
+          scale: 1,
+        });
+        resolve(svg);
+      } catch (e) { reject(e); }
+    }, 50);
+  });
+}
+
 (function initAI() {
   // Style chips
   const chips = document.getElementById("ai-chips");
@@ -442,6 +471,25 @@ async function quantizeColors(dataUrl, k) {
   document.getElementById("ai-dl").addEventListener("click", () => {
     if (!aiDataUrl) return;
     const a = document.createElement("a"); a.href = aiDataUrl; a.download = `decal_ai_${aiSeed}.png`; a.click();
+  });
+
+  document.getElementById("ai-export-svg").addEventListener("click", async () => {
+    if (!aiDataUrl) return toast("Genera un decal primero", true);
+    const btn = document.getElementById("ai-export-svg");
+    const k = Math.max(2, Math.min(24, parseInt(document.getElementById("ai-color-k").value) || 6));
+    btn.disabled = true; btn.textContent = "Trazando paths…";
+    try {
+      const svgStr = await imageToSVG(aiDataUrl, k);
+      const blob = new Blob([svgStr], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a"); a.href = url; a.download = `decal_ai_${aiSeed}.svg`; a.click();
+      URL.revokeObjectURL(url);
+      toast("SVG exportado — ábrelo en Illustrator o Inkscape");
+    } catch (e) {
+      toast("Error al trazar el SVG", true);
+    } finally {
+      btn.disabled = false; btn.textContent = "⬡ Exportar SVG";
+    }
   });
 })();
 
