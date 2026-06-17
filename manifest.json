@@ -1,14 +1,15 @@
 {
   "manifest_version": 3,
   "name": "TP Companion",
-  "version": "1.1.0",
-  "description": "Compañero para Trading Paints Pro: colores, paletas, logos simracing, generador de texturas y mood board.",
+  "version": "1.2.0",
+  "description": "Compañero para Trading Paints Pro: colores, paletas, logos simracing, generador de texturas, mood board y decals con IA.",
   "permissions": ["storage", "downloads", "tabs", "unlimitedStorage"],
   "host_permissions": [
     "https://*.tradingpaints.com/*",
     "https://commons.wikimedia.org/*",
     "https://upload.wikimedia.org/*",
-    "https://*.wikipedia.org/*"
+    "https://*.wikipedia.org/*",
+    "https://image.pollinations.ai/*"
   ],
   "optional_host_permissions": ["https://*/*"],
   "background": { "service_worker": "background.js" },

@@ -13,6 +13,7 @@
       <button class="navbtn active" data-view="logos">🪄 Taller de logos</button>
       <button class="navbtn" data-view="texturas">🧵 Texturas</button>
       <button class="navbtn" data-view="tablero">📌 Tablero</button>
+      <button class="navbtn" data-view="decals">✨ Decals AI</button>
     </nav>
     <div class="side-foot">
       <select id="palette-select" title="Paleta activa"></select>
@@ -146,6 +147,73 @@
       </header>
       <p class="muted">Tu mood board de liveries que te molan. Click en una referencia para extraerle la paleta. Se guarda en local.</p>
       <div id="board-grid" class="board-grid"></div>
+    </section>
+
+    <!-- ===== DECALS AI ===== -->
+    <section class="view" id="view-decals">
+      <header class="vhead"><h1>Generador AI de decals</h1></header>
+      <p class="muted">Describe el decal que quieres y la IA lo genera en segundos. Sin cuenta, sin pagos — powered by Flux.</p>
+      <div class="ai-layout">
+        <div class="ai-controls">
+          <div class="field">
+            <label>Descripción</label>
+            <textarea id="ai-prompt" rows="4" placeholder="Ej: dragón rojo sobre fondo negro, estilo tribal, detallado, simétrico…"></textarea>
+          </div>
+          <div class="field">
+            <label>Estilo rápido <span class="ai-chips-hint muted">(click para añadir)</span></label>
+            <div class="ai-chips" id="ai-chips"></div>
+          </div>
+          <div class="field">
+            <label>Modelo</label>
+            <select id="ai-model">
+              <option value="flux">Flux — equilibrado (recomendado)</option>
+              <option value="flux-realism">Flux Realism — fotorrealista</option>
+              <option value="flux-anime">Flux Anime — dibujo/cómic</option>
+              <option value="turbo">Turbo — más rápido</option>
+            </select>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label>Tamaño</label>
+              <select id="ai-size">
+                <option value="512">512 × 512</option>
+                <option value="1024" selected>1024 × 1024</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Semilla <button id="ai-seed-rnd" class="btn xs ghost" title="Semilla aleatoria">🎲</button></label>
+              <input id="ai-seed" type="number" min="1" max="9999999" placeholder="aleatoria" style="width:100%" />
+            </div>
+          </div>
+          <div class="check ai-bg-check">
+            <input type="checkbox" id="ai-auto-bg" />
+            <label for="ai-auto-bg">Quitar fondo automáticamente tras generar</label>
+          </div>
+          <button id="ai-generate" class="btn primary full" style="margin-top:14px">✨ Generar decal</button>
+          <div id="ai-progress" class="ai-progress" hidden>
+            <div class="ai-spinner"></div>
+            <span id="ai-progress-text">Generando…</span>
+          </div>
+        </div>
+
+        <div class="ai-stage">
+          <div id="ai-result-wrap" class="checker ai-result-wrap">
+            <img id="ai-result-img" alt="" hidden />
+            <div id="ai-placeholder" class="ai-empty-hint">
+              <div class="ai-empty-icon">✨</div>
+              <div>El decal generado aparecerá aquí</div>
+            </div>
+          </div>
+          <div id="ai-result-meta" class="muted ai-meta" hidden></div>
+          <div id="ai-actions" class="ai-actions" hidden>
+            <button id="ai-removebg" class="btn">Quitar fondo</button>
+            <button id="ai-taller" class="btn">🪄 Abrir en Taller</button>
+            <button id="ai-save" class="btn">💾 Guardar en logos</button>
+            <button id="ai-tp" class="btn primary">➕ Enviar a TP</button>
+            <button id="ai-dl" class="btn ghost">⬇ Descargar PNG</button>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 

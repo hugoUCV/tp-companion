@@ -210,6 +210,152 @@ $("#board-file").addEventListener("change", async (e) => {
 });
 
 // ============================================================
+// AI DECAL GENERATOR
+// ============================================================
+const AI_STYLES = [
+  { label: "Racing livery",    prompt: "racing livery graphic, bold geometry, motorsport" },
+  { label: "Retro sponsor",    prompt: "retro 80s sponsor logo, vintage racing, distressed print" },
+  { label: "Dragón",           prompt: "dragon, detailed scales, fierce, symmetrical" },
+  { label: "Neon eléctrico",   prompt: "neon lightning bolt, glowing electric, dark background" },
+  { label: "Fuego y llamas",   prompt: "fire and flames, hot rod style, orange red" },
+  { label: "Tribal",           prompt: "tribal tattoo style, black angular shapes, symmetric" },
+  { label: "Emblema cromo",    prompt: "metallic chrome emblem, 3D shiny, luxury" },
+  { label: "Skull racing",     prompt: "skull with racing helmet, aggressive, detailed" },
+  { label: "Anime / cómic",    prompt: "anime style illustration, bold outlines, dynamic" },
+  { label: "Graffiti",         prompt: "graffiti spray paint tag, urban street art style" },
+];
+
+let aiDataUrl = null;
+let aiSeed = null;
+
+(function initAI() {
+  const chips = document.getElementById("ai-chips");
+  AI_STYLES.forEach(({ label, prompt }) => {
+    const c = document.createElement("button");
+    c.className = "chip"; c.type = "button"; c.textContent = label;
+    c.addEventListener("click", () => {
+      const ta = document.getElementById("ai-prompt");
+      const cur = ta.value.trim();
+      if (cur.includes(prompt)) return;
+      ta.value = cur ? cur + ", " + prompt : prompt;
+      c.classList.add("active");
+    });
+    chips.appendChild(c);
+  });
+
+  document.getElementById("ai-seed-rnd").addEventListener("click", () => {
+    document.getElementById("ai-seed").value = Math.floor(Math.random() * 9999999) + 1;
+  });
+
+  document.getElementById("ai-generate").addEventListener("click", async () => {
+    const promptVal = document.getElementById("ai-prompt").value.trim();
+    if (!promptVal) return toast("Escribe una descripción primero", true);
+
+    const model   = document.getElementById("ai-model").value;
+    const size    = document.getElementById("ai-size").value;
+    const seedInp = document.getElementById("ai-seed").value;
+    aiSeed = seedInp ? parseInt(seedInp) : Math.floor(Math.random() * 9999999) + 1;
+
+    const fullPrompt = promptVal + ", isolated on white, clean edges, vector art style, high detail";
+    const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=${size}&height=${size}&nologo=true&model=${model}&seed=${aiSeed}`;
+
+    const btnGen   = document.getElementById("ai-generate");
+    const progress = document.getElementById("ai-progress");
+    const progText = document.getElementById("ai-progress-text");
+    const resultImg = document.getElementById("ai-result-img");
+    const placeholder = document.getElementById("ai-placeholder");
+    const actions = document.getElementById("ai-actions");
+    const meta    = document.getElementById("ai-result-meta");
+
+    btnGen.disabled = true;
+    progress.hidden = false;
+    resultImg.hidden = true;
+    placeholder.style.display = "";
+    placeholder.querySelector("div:last-child").textContent = "El decal generado aparecerá aquí";
+    actions.hidden = true;
+    meta.hidden = true;
+    aiDataUrl = null;
+
+    const msgs = ["Pensando…", "Esbozando el decal…", "Añadiendo detalles…", "Casi listo…"];
+    let mi = 0;
+    const msgInterval = setInterval(() => { progText.textContent = msgs[mi++ % msgs.length]; }, 2200);
+
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const blob = await res.blob();
+      const dataUrl = await new Promise((ok, err) => {
+        const r = new FileReader();
+        r.onload = () => ok(r.result);
+        r.onerror = err;
+        r.readAsDataURL(blob);
+      });
+
+      aiDataUrl = dataUrl;
+      if (document.getElementById("ai-auto-bg").checked) {
+        aiDataUrl = await removeWhiteBg(aiDataUrl);
+      }
+
+      resultImg.src = aiDataUrl;
+      resultImg.hidden = false;
+      placeholder.style.display = "none";
+      meta.textContent = `Semilla: ${aiSeed}  ·  Modelo: ${model}  ·  ${size}×${size} px`;
+      meta.hidden = false;
+      actions.hidden = false;
+      toast("Decal generado");
+    } catch (e) {
+      placeholder.querySelector("div:last-child").textContent = "Error al generar. Inténtalo de nuevo.";
+      toast("No se pudo conectar con la IA. Revisa tu conexión.", true);
+    } finally {
+      clearInterval(msgInterval);
+      progress.hidden = true;
+      btnGen.disabled = false;
+    }
+  });
+
+  document.getElementById("ai-removebg").addEventListener("click", async () => {
+    if (!aiDataUrl) return;
+    const cleaned = await removeWhiteBg(aiDataUrl);
+    if (cleaned === aiDataUrl) return toast("No había fondo blanco que quitar");
+    aiDataUrl = cleaned;
+    document.getElementById("ai-result-img").src = cleaned;
+    toast("Fondo quitado");
+  });
+
+  document.getElementById("ai-taller").addEventListener("click", () => {
+    if (!aiDataUrl) return;
+    workOriginal = aiDataUrl;
+    setWork(aiDataUrl, true);
+    showView("logos");
+    toast("Abierto en el Taller de logos");
+  });
+
+  document.getElementById("ai-save").addEventListener("click", async () => {
+    if (!aiDataUrl) return;
+    const name = prompt("Nombre del decal:", "decal_ai");
+    if (!name) return;
+    const { userLogos } = await store.get({ userLogos: [] });
+    userLogos.push({ id: "u" + Date.now(), name: name.trim(), cat: "_mios", dataUrl: aiDataUrl, mime: "image/png" });
+    await store.set({ userLogos });
+    toast('"' + name.trim() + '" guardado en Mis logos');
+  });
+
+  document.getElementById("ai-tp").addEventListener("click", async () => {
+    if (!aiDataUrl) return toast("Genera un decal primero", true);
+    if (!IS_EXT) return toast("Solo disponible como extensión", true);
+    const n = await TPC.enqueueInject({ dataUrl: aiDataUrl, mime: "image/png", filename: `decal_ai_${aiSeed}.png`, name: "decal AI" });
+    const onTP = await TPC.focusTradingPaintsTab();
+    toast(onTP ? `En cola (${n}) · añadido al formulario` : `Abriendo TP · ${n} en cola`);
+  });
+
+  document.getElementById("ai-dl").addEventListener("click", () => {
+    if (!aiDataUrl) return;
+    const a = document.createElement("a");
+    a.href = aiDataUrl; a.download = `decal_ai_${aiSeed}.png`; a.click();
+  });
+})();
+
+// ============================================================
 // DONACIÓN
 // ============================================================
 const DONATE_URL = "https://www.paypal.com/paypalme/flyerreps";
