@@ -152,26 +152,35 @@
     <!-- ===== DECALS AI ===== -->
     <section class="view" id="view-decals">
       <header class="vhead"><h1>Generador AI de decals</h1></header>
-      <p class="muted">Describe el decal que quieres y la IA lo genera en segundos. Sin cuenta, sin pagos — powered by Flux.</p>
+      <p class="muted">Describe el decal, deja que la IA mejore el prompt y genera. Sin cuenta, sin pagos — powered by Flux.</p>
       <div class="ai-layout">
         <div class="ai-controls">
+
           <div class="field">
-            <label>Descripción <button id="ai-perfect-prompt" class="btn xs" type="button" title="Añade descriptores de estilo vector al prompt">🪄 Optimizar para vector</button></label>
-            <textarea id="ai-prompt" rows="4" placeholder="Ej: dragón rojo sobre fondo negro, estilo tribal, detallado, simétrico…"></textarea>
+            <label>Descripción</label>
+            <textarea id="ai-prompt" rows="4" placeholder="Ej: dragón rojo con llamas, tribal, simétrico…"></textarea>
+            <button id="ai-enhance-prompt" class="btn small ai-enhance-btn" type="button">
+              <span id="ai-enhance-icon">🤖</span> Mejorar prompt con IA
+            </button>
           </div>
+
           <div class="field">
             <label>Estilo rápido <span class="ai-chips-hint muted">(click para añadir)</span></label>
             <div class="ai-chips" id="ai-chips"></div>
           </div>
+
           <div class="field">
             <label>Modelo</label>
             <select id="ai-model">
-              <option value="flux">Flux — equilibrado (recomendado)</option>
+              <option value="flux">Flux — general (recomendado)</option>
               <option value="flux-realism">Flux Realism — fotorrealista</option>
-              <option value="flux-anime">Flux Anime — dibujo/cómic</option>
+              <option value="flux-anime">Flux Anime — ilustración/cómic</option>
+              <option value="flux-3d">Flux 3D — efecto tridimensional</option>
+              <option value="flux-pro">Flux Pro — máxima calidad</option>
               <option value="turbo">Turbo — más rápido</option>
             </select>
           </div>
+
           <div class="row2">
             <div class="field">
               <label>Tamaño</label>
@@ -181,24 +190,31 @@
               </select>
             </div>
             <div class="field">
-              <label>Semilla <button id="ai-seed-rnd" class="btn xs ghost" title="Semilla aleatoria">🎲</button></label>
+              <label>Semilla <button id="ai-seed-rnd" class="btn xs ghost">🎲</button></label>
               <input id="ai-seed" type="number" min="1" max="9999999" placeholder="aleatoria" style="width:100%" />
             </div>
           </div>
+
+          <div class="field">
+            <label class="ai-neg-label">
+              Evitar en la imagen
+              <span class="muted ai-neg-hint">(prompt negativo)</span>
+            </label>
+            <input id="ai-negative" type="text" placeholder="foto realista, borroso, sombras, gradiente…" style="width:100%" />
+          </div>
+
           <div class="ai-toggles">
             <label class="ai-toggle-row">
               <input type="checkbox" id="ai-mode-vector" />
-              <span class="ai-toggle-label">Modo Vector <span class="ai-toggle-sub">prompt + auto-vectorizar</span></span>
+              <span class="ai-toggle-label">Modo Vector <span class="ai-toggle-sub">prompt + auto-vectorizar al generar</span></span>
             </label>
             <label class="ai-toggle-row">
               <input type="checkbox" id="ai-auto-bg" />
               <span class="ai-toggle-label">Quitar fondo tras generar</span>
             </label>
           </div>
-          <div class="ai-gen-row">
-            <button id="ai-generate" class="btn primary ai-gen-main">✨ Generar</button>
-            <button id="ai-batch" class="btn ai-gen-batch" type="button" title="Genera 4 variaciones en paralelo y elige la mejor">⚡ ×4</button>
-          </div>
+
+          <button id="ai-generate" class="btn primary full" style="margin-top:14px">✨ Generar decal</button>
           <div id="ai-progress" class="ai-progress" hidden>
             <div class="ai-spinner"></div>
             <span id="ai-progress-text">Generando…</span>
@@ -206,7 +222,6 @@
         </div>
 
         <div class="ai-stage">
-          <!-- resultado principal -->
           <div id="ai-result-wrap" class="checker ai-result-wrap">
             <img id="ai-result-img" alt="" hidden />
             <div id="ai-placeholder" class="ai-empty-hint">
@@ -216,64 +231,19 @@
           </div>
           <div id="ai-result-meta" class="muted ai-meta" hidden></div>
 
-          <!-- batch grid 2×2 -->
-          <div id="ai-batch-grid" class="ai-batch-grid" hidden></div>
-
-          <!-- acciones -->
           <div id="ai-actions" class="ai-actions" hidden>
             <div class="ai-vec-row">
               <button id="ai-vectorize" class="btn ai-vec-btn" type="button">🎨 Vectorizar</button>
               <label class="ai-vec-k-label">Colores <input id="ai-color-k" type="number" min="2" max="24" value="6" class="ai-color-k-inp" /></label>
-              <button id="ai-export-svg" class="btn ai-svg-btn" type="button" title="SVG real con paths Bezier, editable en Illustrator">⬡ SVG</button>
+              <button id="ai-export-svg" class="btn" type="button" title="SVG real editable en Illustrator">⬡ SVG</button>
             </div>
             <div class="ai-act-row">
-              <button id="ai-car-preview-btn" class="btn">🏎 Preview en coche</button>
               <button id="ai-removebg" class="btn">Quitar fondo</button>
               <button id="ai-taller" class="btn">🪄 Taller</button>
               <button id="ai-save" class="btn">💾 Guardar</button>
               <button id="ai-tp" class="btn primary">➕ Enviar a TP</button>
               <button id="ai-dl" class="btn ghost">⬇ PNG</button>
             </div>
-          </div>
-
-          <!-- car preview -->
-          <div id="ai-car-preview" class="ai-car-preview" hidden>
-            <div class="ai-car-bar">
-              <span class="ai-car-bar-title">Preview en coche</span>
-              <label class="ai-car-scale-label">Escala <input id="ai-car-scale" type="range" min="5" max="70" value="28" /></label>
-              <button id="ai-car-capture" class="btn small">📸 Capturar</button>
-              <button id="ai-car-close" class="btn xs ghost">✕</button>
-            </div>
-            <div id="ai-car-wrap" class="ai-car-wrap">
-              <svg id="car-svg" viewBox="0 0 620 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-                <ellipse cx="308" cy="200" rx="245" ry="10" fill="rgba(0,0,0,.35)"/>
-                <!-- body -->
-                <path d="M 48,188 L 44,168 C 48,148 68,138 95,128 L 138,108 C 162,90 182,80 210,75 L 258,65 L 275,56 L 392,54 L 415,62 L 445,82 L 478,106 L 520,122 C 548,132 566,146 572,162 L 574,188 Z" fill="#1c2235" stroke="#2a3550" stroke-width="1.5"/>
-                <!-- windshield -->
-                <path d="M 213,75 L 258,65 L 275,56 L 392,54 L 415,62 L 408,85 L 355,90 L 248,90 Z" fill="#0d1520" opacity=".88"/>
-                <line x1="248" y1="90" x2="355" y2="90" stroke="#253047" stroke-width="1"/>
-                <!-- spoiler -->
-                <rect x="554" y="100" width="32" height="6" rx="2" fill="#131824" stroke="#2a3550" stroke-width="1"/>
-                <rect x="570" y="105" width="4" height="26" fill="#131824" stroke="#2a3550" stroke-width="1"/>
-                <!-- splitter -->
-                <rect x="28" y="175" width="28" height="5" rx="1" fill="#131824" stroke="#2a3550" stroke-width="1"/>
-                <!-- wheel wells -->
-                <circle cx="150" cy="188" r="38" fill="#0a0d14"/>
-                <circle cx="468" cy="188" r="38" fill="#0a0d14"/>
-                <!-- tyres -->
-                <circle cx="150" cy="188" r="33" fill="#141820" stroke="#222836" stroke-width="2"/>
-                <circle cx="468" cy="188" r="33" fill="#141820" stroke="#222836" stroke-width="2"/>
-                <!-- rims -->
-                <circle cx="150" cy="188" r="20" fill="#1c2235" stroke="#2a3550" stroke-width="1.5"/>
-                <circle cx="468" cy="188" r="20" fill="#1c2235" stroke="#2a3550" stroke-width="1.5"/>
-                <circle cx="150" cy="188" r="7" fill="#2a3550"/>
-                <circle cx="468" cy="188" r="7" fill="#2a3550"/>
-                <!-- body highlight -->
-                <path d="M 70,145 C 120,118 175,95 230,80 L 380,62 C 415,59 445,70 472,92" fill="none" stroke="rgba(255,255,255,.055)" stroke-width="2.5"/>
-              </svg>
-              <img id="ai-car-decal" class="ai-car-decal" alt="" hidden />
-            </div>
-            <p class="muted" style="font-size:11px;margin-top:5px;text-align:center">Arrastra el decal sobre el coche para reposicionarlo</p>
           </div>
 
           <!-- historial -->

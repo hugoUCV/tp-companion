@@ -225,7 +225,8 @@ const AI_STYLES = [
   { label: "Graffiti",       prompt: "graffiti spray paint tag, urban street art style" },
 ];
 
-const VECTOR_SUFFIX = "flat vector sticker art, bold black outlines, solid flat fill colors, no gradients, no shadows, no noise, no texture, adobe illustrator clipart style, die-cut sticker, svg vector, crisp clean edges, limited color palette, white background";
+const VECTOR_SUFFIX = "flat vector sticker, bold black outlines, solid flat fills, maximum 5 colors, pure white background, centered composition, die-cut sticker design, crisp sharp edges, adobe illustrator clipart, no gradients, no shadows, no photo realism, no noise, no texture";
+const DEFAULT_NEGATIVE = "photo realistic, blurry, gradient, shadow, noise, watermark, 3d render, rough edges, anti-aliasing, bokeh, lens flare, text, letters";
 
 let aiDataUrl = null;
 let aiSeed = null;
@@ -318,11 +319,22 @@ async function imageToSVG(dataUrl, k) {
 }
 
 // ---- helpers compartidos por generate + batch ----
+async function enhancePromptWithAI(userPrompt) {
+  const system = "You are an expert Flux AI image prompt engineer specializing in flat vector sticker art for racing car liveries. Transform the user's simple description into a rich, detailed Flux image generation prompt. Rules: flat vector illustration, bold black outlines, solid flat colors only (no gradients), pure white background, centered composition, die-cut sticker ready, clean crisp edges, limited palette. Do NOT add subjects the user didn't mention. Respond ONLY with the optimized prompt. No explanation. No quotes. Max 120 words.";
+  const message = `Optimize this decal idea into a Flux prompt: "${userPrompt}"`;
+  const url = `https://text.pollinations.ai/${encodeURIComponent(message)}?model=openai&system=${encodeURIComponent(system)}&seed=${Math.floor(Math.random() * 9999)}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return (await res.text()).trim().replace(/^["']|["']$/g, "");
+}
+
 async function generateOne(promptVal, model, size, seed) {
-  const isVector = document.getElementById("ai-mode-vector").checked;
-  const suffix   = isVector ? VECTOR_SUFFIX : "isolated on white background, clean edges, high detail";
-  const full     = promptVal.includes(VECTOR_SUFFIX) ? promptVal : promptVal + ", " + suffix;
-  const url      = `https://image.pollinations.ai/prompt/${encodeURIComponent(full)}?width=${size}&height=${size}&nologo=true&model=${model}&seed=${seed}`;
+  const isVector  = document.getElementById("ai-mode-vector").checked;
+  const suffix    = isVector ? VECTOR_SUFFIX : "isolated on white background, clean crisp edges, high detail";
+  const full      = promptVal.includes(VECTOR_SUFFIX) ? promptVal : promptVal + ", " + suffix;
+  const negInput  = document.getElementById("ai-negative");
+  const negative  = negInput?.value.trim() || DEFAULT_NEGATIVE;
+  const url       = `https://image.pollinations.ai/prompt/${encodeURIComponent(full)}?width=${size}&height=${size}&nologo=true&model=${model}&seed=${seed}&negative=${encodeURIComponent(negative)}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const blob = await res.blob();
@@ -401,14 +413,25 @@ function renderHistory(history) {
     chips.appendChild(c);
   });
 
-  // Optimizar para vector
-  document.getElementById("ai-perfect-prompt").addEventListener("click", () => {
-    const ta = document.getElementById("ai-prompt");
+  // Mejorar prompt con IA (Pollinations text API)
+  document.getElementById("ai-negative").value = DEFAULT_NEGATIVE;
+
+  document.getElementById("ai-enhance-prompt").addEventListener("click", async () => {
+    const ta  = document.getElementById("ai-prompt");
     const cur = ta.value.trim();
     if (!cur) return toast("Escribe una descripción primero", true);
-    if (cur.includes(VECTOR_SUFFIX)) return toast("El prompt ya está optimizado");
-    ta.value = cur + ", " + VECTOR_SUFFIX;
-    toast("Prompt mejorado para estilo vector");
+    const btn  = document.getElementById("ai-enhance-prompt");
+    const icon = document.getElementById("ai-enhance-icon");
+    btn.disabled = true; icon.textContent = "⏳";
+    try {
+      const enhanced = await enhancePromptWithAI(cur);
+      ta.value = enhanced;
+      toast("Prompt mejorado con IA");
+    } catch (e) {
+      toast("No se pudo conectar con la IA de texto", true);
+    } finally {
+      btn.disabled = false; icon.textContent = "🤖";
+    }
   });
 
   // Seed random
@@ -517,48 +540,6 @@ function renderHistory(history) {
     const a = document.createElement("a"); a.href = aiDataUrl; a.download = `decal_ai_${aiSeed}.png`; a.click();
   });
 
-  // ---- Batch ×4 ----
-  document.getElementById("ai-batch").addEventListener("click", async () => {
-    const promptVal = document.getElementById("ai-prompt").value.trim();
-    if (!promptVal) return toast("Escribe una descripción primero", true);
-    const model  = document.getElementById("ai-model").value;
-    const size   = document.getElementById("ai-size").value;
-    const seeds  = Array.from({ length: 4 }, () => Math.floor(Math.random() * 9999999) + 1);
-    const btnB   = document.getElementById("ai-batch");
-    const grid   = document.getElementById("ai-batch-grid");
-    btnB.disabled = true; btnB.textContent = "…";
-    grid.hidden = false;
-    grid.innerHTML = '<div class="ai-batch-loading"><div class="ai-spinner"></div><span>Generando 4 variaciones en paralelo…</span></div>';
-
-    const results = await Promise.allSettled(seeds.map(s => generateOne(promptVal, model, size, s)));
-
-    grid.innerHTML = "";
-    results.forEach((r, i) => {
-      const card = document.createElement("div"); card.className = "ai-batch-card";
-      if (r.status === "fulfilled") {
-        const img = document.createElement("img"); img.src = r.value; card.appendChild(img);
-        const btn = document.createElement("button"); btn.className = "btn small primary ai-batch-select"; btn.textContent = "Usar esta";
-        btn.addEventListener("click", () => {
-          aiDataUrl = r.value; aiSeed = seeds[i];
-          document.getElementById("ai-result-img").src = r.value;
-          document.getElementById("ai-result-img").hidden = false;
-          document.getElementById("ai-placeholder").style.display = "none";
-          document.getElementById("ai-result-meta").textContent = `Semilla: ${seeds[i]}  ·  ${model}  ·  variación ${i + 1}`;
-          document.getElementById("ai-result-meta").hidden = false;
-          document.getElementById("ai-actions").hidden = false;
-          grid.hidden = true;
-          saveToHistory({ dataUrl: r.value, prompt: promptVal, seed: seeds[i], model, size });
-          toast("Variación seleccionada");
-        });
-        card.appendChild(btn);
-      } else {
-        card.innerHTML = '<div class="ai-batch-error">Error</div>';
-      }
-      grid.appendChild(card);
-    });
-    btnB.disabled = false; btnB.textContent = "⚡ ×4";
-  });
-
   // ---- Historial ----
   document.getElementById("ai-history-clear").addEventListener("click", async () => {
     await store.set({ aiHistory: [] });
@@ -567,82 +548,6 @@ function renderHistory(history) {
     toast("Historial borrado");
   });
   loadHistory();
-
-  // ---- Car preview ----
-  let decalPos = { x: 180, y: 60 };
-  let dragOffset = null;
-
-  function applyDecalTransform() {
-    const d = document.getElementById("ai-car-decal");
-    const scale = parseInt(document.getElementById("ai-car-scale").value) / 100;
-    const wrap = document.getElementById("ai-car-wrap");
-    const wrapW = wrap.clientWidth || 620;
-    const sz = wrapW * scale;
-    d.style.width  = sz + "px";
-    d.style.height = sz + "px";
-    d.style.left   = decalPos.x + "px";
-    d.style.top    = decalPos.y + "px";
-  }
-
-  document.getElementById("ai-car-preview-btn").addEventListener("click", () => {
-    if (!aiDataUrl) return toast("Genera un decal primero", true);
-    const preview = document.getElementById("ai-car-preview");
-    const decal   = document.getElementById("ai-car-decal");
-    preview.hidden = false;
-    decal.src = aiDataUrl; decal.hidden = false;
-    const wrap = document.getElementById("ai-car-wrap");
-    decalPos = { x: (wrap.clientWidth || 620) * 0.3, y: (wrap.clientHeight || 220) * 0.18 };
-    applyDecalTransform();
-    preview.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  });
-
-  document.getElementById("ai-car-scale").addEventListener("input", applyDecalTransform);
-  document.getElementById("ai-car-close").addEventListener("click", () => {
-    document.getElementById("ai-car-preview").hidden = true;
-  });
-
-  const carWrap = document.getElementById("ai-car-wrap");
-  carWrap.addEventListener("mousedown", e => {
-    const d = document.getElementById("ai-car-decal");
-    if (!d.contains(e.target) && e.target !== d) return;
-    e.preventDefault();
-    const rect = d.getBoundingClientRect();
-    dragOffset = { x: e.clientX - rect.left - rect.width / 2, y: e.clientY - rect.top - rect.height / 2 };
-  });
-  document.addEventListener("mousemove", e => {
-    if (!dragOffset) return;
-    const wRect = carWrap.getBoundingClientRect();
-    decalPos = { x: e.clientX - wRect.left - dragOffset.x - parseInt(document.getElementById("ai-car-decal").style.width) / 2,
-                 y: e.clientY - wRect.top  - dragOffset.y - parseInt(document.getElementById("ai-car-decal").style.height) / 2 };
-    applyDecalTransform();
-  });
-  document.addEventListener("mouseup", () => { dragOffset = null; });
-
-  document.getElementById("ai-car-capture").addEventListener("click", async () => {
-    const wrap = document.getElementById("ai-car-wrap");
-    const wW = wrap.clientWidth, wH = wrap.clientHeight;
-    const svgEl = document.getElementById("car-svg");
-    const svgStr = new XMLSerializer().serializeToString(svgEl);
-    const svgBlob = new Blob([svgStr], { type: "image/svg+xml" });
-    const svgBlobUrl = URL.createObjectURL(svgBlob);
-
-    const c = document.createElement("canvas"); c.width = wW; c.height = wH;
-    const ctx = c.getContext("2d");
-    ctx.fillStyle = "#0d1117"; ctx.fillRect(0, 0, wW, wH);
-
-    const carImg = await loadImage(svgBlobUrl);
-    ctx.drawImage(carImg, 0, 0, wW, wH);
-    URL.revokeObjectURL(svgBlobUrl);
-
-    const decalEl = document.getElementById("ai-car-decal");
-    const decalImg = await loadImage(aiDataUrl);
-    const dW = parseInt(decalEl.style.width), dH = parseInt(decalEl.style.height);
-    ctx.drawImage(decalImg, decalPos.x, decalPos.y, dW, dH);
-
-    const a = document.createElement("a");
-    a.href = c.toDataURL("image/png"); a.download = `preview_coche_${aiSeed}.png`; a.click();
-    toast("Preview capturado");
-  });
 
   document.getElementById("ai-export-svg").addEventListener("click", async () => {
     if (!aiDataUrl) return toast("Genera un decal primero", true);

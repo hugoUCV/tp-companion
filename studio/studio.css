@@ -764,6 +764,16 @@ input[type="range"] {
   color: var(--text);
   box-shadow: 0 0 0 1px rgba(232,68,58,.3);
 }
+.ai-enhance-btn {
+  width: 100%; margin-top: 7px; font-weight: 600;
+  background: linear-gradient(90deg, rgba(99,102,241,.18), var(--bg3));
+  border-color: rgba(99,102,241,.35); color: #a5b4fc;
+  transition: background var(--t-base), border-color var(--t-base), color var(--t-base);
+}
+.ai-enhance-btn:hover { background: linear-gradient(90deg, rgba(99,102,241,.28), var(--bg4)); border-color: #818cf8; color: #c7d2fe; }
+.ai-enhance-btn:disabled { opacity: .6; cursor: wait; }
+.ai-neg-label { display: flex; align-items: baseline; gap: 6px; }
+.ai-neg-hint { font-size: 10px; letter-spacing: 0; text-transform: none; }
 .ai-toggles { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
 .ai-toggle-row {
   display: flex; align-items: center; gap: 8px;
