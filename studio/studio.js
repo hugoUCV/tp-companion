@@ -317,6 +317,74 @@ async function imageToSVG(dataUrl, k) {
   });
 }
 
+// ---- helpers compartidos por generate + batch ----
+async function generateOne(promptVal, model, size, seed) {
+  const isVector = document.getElementById("ai-mode-vector").checked;
+  const suffix   = isVector ? VECTOR_SUFFIX : "isolated on white background, clean edges, high detail";
+  const full     = promptVal.includes(VECTOR_SUFFIX) ? promptVal : promptVal + ", " + suffix;
+  const url      = `https://image.pollinations.ai/prompt/${encodeURIComponent(full)}?width=${size}&height=${size}&nologo=true&model=${model}&seed=${seed}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const blob = await res.blob();
+  let du = await new Promise((ok, err) => { const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = err; r.readAsDataURL(blob); });
+  if (document.getElementById("ai-auto-bg").checked) du = await removeWhiteBg(du);
+  if (isVector) {
+    const k = Math.max(2, Math.min(24, parseInt(document.getElementById("ai-color-k").value) || 6));
+    du = await quantizeColors(du, k);
+    du = await removeWhiteBg(du);
+  }
+  return du;
+}
+
+async function makeThumbnail(dataUrl, size = 120) {
+  const img = await loadImage(dataUrl);
+  const c = document.createElement("canvas"); c.width = size; c.height = size;
+  const ctx = c.getContext("2d");
+  const s = Math.min(size / img.naturalWidth, size / img.naturalHeight);
+  ctx.drawImage(img, (size - img.naturalWidth * s) / 2, (size - img.naturalHeight * s) / 2, img.naturalWidth * s, img.naturalHeight * s);
+  return c.toDataURL("image/jpeg", 0.78);
+}
+
+// ---- historial ----
+const AI_HIST_MAX = 12;
+
+async function saveToHistory(entry) {
+  const thumb = await makeThumbnail(entry.dataUrl);
+  const { aiHistory = [] } = await store.get({ aiHistory: [] });
+  aiHistory.unshift({ ...entry, thumb, ts: Date.now(), id: "h" + Date.now() });
+  if (aiHistory.length > AI_HIST_MAX) aiHistory.length = AI_HIST_MAX;
+  await store.set({ aiHistory });
+  renderHistory(aiHistory);
+}
+async function loadHistory() {
+  const { aiHistory = [] } = await store.get({ aiHistory: [] });
+  if (aiHistory.length) renderHistory(aiHistory);
+}
+function renderHistory(history) {
+  const wrap = document.getElementById("ai-history");
+  const strip = document.getElementById("ai-history-strip");
+  if (!history.length) { wrap.hidden = true; return; }
+  wrap.hidden = false; strip.innerHTML = "";
+  history.forEach(entry => {
+    const card = document.createElement("div"); card.className = "ai-history-thumb";
+    const img = document.createElement("img"); img.src = entry.thumb; img.title = entry.prompt;
+    const meta = document.createElement("div"); meta.className = "ai-history-thumb-meta";
+    meta.textContent = entry.model + "  " + new Date(entry.ts).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    card.append(img, meta);
+    card.addEventListener("click", () => {
+      aiDataUrl = entry.dataUrl; aiSeed = entry.seed;
+      document.getElementById("ai-result-img").src = entry.dataUrl;
+      document.getElementById("ai-result-img").hidden = false;
+      document.getElementById("ai-placeholder").style.display = "none";
+      document.getElementById("ai-result-meta").textContent = `Semilla: ${entry.seed}  ·  ${entry.model}  ·  historial`;
+      document.getElementById("ai-result-meta").hidden = false;
+      document.getElementById("ai-actions").hidden = false;
+      toast("Generación restaurada");
+    });
+    strip.appendChild(card);
+  });
+}
+
 (function initAI() {
   // Style chips
   const chips = document.getElementById("ai-chips");
@@ -353,15 +421,11 @@ async function imageToSVG(dataUrl, k) {
     const promptVal = document.getElementById("ai-prompt").value.trim();
     if (!promptVal) return toast("Escribe una descripción primero", true);
 
-    const isVectorMode = document.getElementById("ai-mode-vector").checked;
-    const model   = document.getElementById("ai-model").value;
-    const size    = document.getElementById("ai-size").value;
-    const seedInp = document.getElementById("ai-seed").value;
+    const isVector  = document.getElementById("ai-mode-vector").checked;
+    const model     = document.getElementById("ai-model").value;
+    const size      = document.getElementById("ai-size").value;
+    const seedInp   = document.getElementById("ai-seed").value;
     aiSeed = seedInp ? parseInt(seedInp) : Math.floor(Math.random() * 9999999) + 1;
-
-    const baseSuffix = isVectorMode ? VECTOR_SUFFIX : "isolated on white, clean edges, high detail";
-    const fullPrompt = promptVal.includes(VECTOR_SUFFIX) ? promptVal : promptVal + ", " + baseSuffix;
-    const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(fullPrompt)}?width=${size}&height=${size}&nologo=true&model=${model}&seed=${aiSeed}`;
 
     const btnGen    = document.getElementById("ai-generate");
     const progress  = document.getElementById("ai-progress");
@@ -376,46 +440,26 @@ async function imageToSVG(dataUrl, k) {
     resultImg.hidden = true;
     placeholder.style.display = "";
     placeholder.querySelector("div:last-child").textContent = "Generando, espera…";
-    actions.hidden = true;
-    meta.hidden = true;
-    aiDataUrl = null;
+    actions.hidden = true; meta.hidden = true; aiDataUrl = null;
+    document.getElementById("ai-batch-grid").hidden = true;
 
     const msgs = ["Pensando…", "Esbozando el decal…", "Añadiendo detalles…", "Casi listo…"];
     let mi = 0;
     const msgInterval = setInterval(() => { progText.textContent = msgs[mi++ % msgs.length]; }, 2200);
 
     try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const blob = await res.blob();
-      aiDataUrl = await new Promise((ok, err) => {
-        const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = err; r.readAsDataURL(blob);
-      });
-
-      if (document.getElementById("ai-auto-bg").checked) aiDataUrl = await removeWhiteBg(aiDataUrl);
-      if (isVectorMode) {
-        progText.textContent = "Vectorizando…";
-        progress.hidden = false;
-        const k = Math.max(2, Math.min(24, parseInt(document.getElementById("ai-color-k").value) || 6));
-        aiDataUrl = await quantizeColors(aiDataUrl, k);
-        aiDataUrl = await removeWhiteBg(aiDataUrl);
-      }
-
-      resultImg.src = aiDataUrl;
-      resultImg.hidden = false;
+      aiDataUrl = await generateOne(promptVal, model, size, aiSeed);
+      resultImg.src = aiDataUrl; resultImg.hidden = false;
       placeholder.style.display = "none";
-      const modeLabel = isVectorMode ? "  ·  Modo Vector" : "";
-      meta.textContent = `Semilla: ${aiSeed}  ·  Modelo: ${model}  ·  ${size}×${size} px${modeLabel}`;
-      meta.hidden = false;
-      actions.hidden = false;
-      toast(isVectorMode ? "Decal generado en modo vector" : "Decal generado");
+      meta.textContent = `Semilla: ${aiSeed}  ·  ${model}  ·  ${size}×${size}${isVector ? "  ·  Vector" : ""}`;
+      meta.hidden = false; actions.hidden = false;
+      toast(isVector ? "Decal generado en modo vector" : "Decal generado");
+      saveToHistory({ dataUrl: aiDataUrl, prompt: promptVal, seed: aiSeed, model, size });
     } catch (e) {
       placeholder.querySelector("div:last-child").textContent = "Error al generar. Inténtalo de nuevo.";
-      toast("No se pudo conectar con la IA. Revisa tu conexión.", true);
+      toast("No se pudo conectar con la IA.", true);
     } finally {
-      clearInterval(msgInterval);
-      progress.hidden = true;
-      btnGen.disabled = false;
+      clearInterval(msgInterval); progress.hidden = true; btnGen.disabled = false;
     }
   });
 
@@ -471,6 +515,133 @@ async function imageToSVG(dataUrl, k) {
   document.getElementById("ai-dl").addEventListener("click", () => {
     if (!aiDataUrl) return;
     const a = document.createElement("a"); a.href = aiDataUrl; a.download = `decal_ai_${aiSeed}.png`; a.click();
+  });
+
+  // ---- Batch ×4 ----
+  document.getElementById("ai-batch").addEventListener("click", async () => {
+    const promptVal = document.getElementById("ai-prompt").value.trim();
+    if (!promptVal) return toast("Escribe una descripción primero", true);
+    const model  = document.getElementById("ai-model").value;
+    const size   = document.getElementById("ai-size").value;
+    const seeds  = Array.from({ length: 4 }, () => Math.floor(Math.random() * 9999999) + 1);
+    const btnB   = document.getElementById("ai-batch");
+    const grid   = document.getElementById("ai-batch-grid");
+    btnB.disabled = true; btnB.textContent = "…";
+    grid.hidden = false;
+    grid.innerHTML = '<div class="ai-batch-loading"><div class="ai-spinner"></div><span>Generando 4 variaciones en paralelo…</span></div>';
+
+    const results = await Promise.allSettled(seeds.map(s => generateOne(promptVal, model, size, s)));
+
+    grid.innerHTML = "";
+    results.forEach((r, i) => {
+      const card = document.createElement("div"); card.className = "ai-batch-card";
+      if (r.status === "fulfilled") {
+        const img = document.createElement("img"); img.src = r.value; card.appendChild(img);
+        const btn = document.createElement("button"); btn.className = "btn small primary ai-batch-select"; btn.textContent = "Usar esta";
+        btn.addEventListener("click", () => {
+          aiDataUrl = r.value; aiSeed = seeds[i];
+          document.getElementById("ai-result-img").src = r.value;
+          document.getElementById("ai-result-img").hidden = false;
+          document.getElementById("ai-placeholder").style.display = "none";
+          document.getElementById("ai-result-meta").textContent = `Semilla: ${seeds[i]}  ·  ${model}  ·  variación ${i + 1}`;
+          document.getElementById("ai-result-meta").hidden = false;
+          document.getElementById("ai-actions").hidden = false;
+          grid.hidden = true;
+          saveToHistory({ dataUrl: r.value, prompt: promptVal, seed: seeds[i], model, size });
+          toast("Variación seleccionada");
+        });
+        card.appendChild(btn);
+      } else {
+        card.innerHTML = '<div class="ai-batch-error">Error</div>';
+      }
+      grid.appendChild(card);
+    });
+    btnB.disabled = false; btnB.textContent = "⚡ ×4";
+  });
+
+  // ---- Historial ----
+  document.getElementById("ai-history-clear").addEventListener("click", async () => {
+    await store.set({ aiHistory: [] });
+    document.getElementById("ai-history").hidden = true;
+    document.getElementById("ai-history-strip").innerHTML = "";
+    toast("Historial borrado");
+  });
+  loadHistory();
+
+  // ---- Car preview ----
+  let decalPos = { x: 180, y: 60 };
+  let dragOffset = null;
+
+  function applyDecalTransform() {
+    const d = document.getElementById("ai-car-decal");
+    const scale = parseInt(document.getElementById("ai-car-scale").value) / 100;
+    const wrap = document.getElementById("ai-car-wrap");
+    const wrapW = wrap.clientWidth || 620;
+    const sz = wrapW * scale;
+    d.style.width  = sz + "px";
+    d.style.height = sz + "px";
+    d.style.left   = decalPos.x + "px";
+    d.style.top    = decalPos.y + "px";
+  }
+
+  document.getElementById("ai-car-preview-btn").addEventListener("click", () => {
+    if (!aiDataUrl) return toast("Genera un decal primero", true);
+    const preview = document.getElementById("ai-car-preview");
+    const decal   = document.getElementById("ai-car-decal");
+    preview.hidden = false;
+    decal.src = aiDataUrl; decal.hidden = false;
+    const wrap = document.getElementById("ai-car-wrap");
+    decalPos = { x: (wrap.clientWidth || 620) * 0.3, y: (wrap.clientHeight || 220) * 0.18 };
+    applyDecalTransform();
+    preview.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+
+  document.getElementById("ai-car-scale").addEventListener("input", applyDecalTransform);
+  document.getElementById("ai-car-close").addEventListener("click", () => {
+    document.getElementById("ai-car-preview").hidden = true;
+  });
+
+  const carWrap = document.getElementById("ai-car-wrap");
+  carWrap.addEventListener("mousedown", e => {
+    const d = document.getElementById("ai-car-decal");
+    if (!d.contains(e.target) && e.target !== d) return;
+    e.preventDefault();
+    const rect = d.getBoundingClientRect();
+    dragOffset = { x: e.clientX - rect.left - rect.width / 2, y: e.clientY - rect.top - rect.height / 2 };
+  });
+  document.addEventListener("mousemove", e => {
+    if (!dragOffset) return;
+    const wRect = carWrap.getBoundingClientRect();
+    decalPos = { x: e.clientX - wRect.left - dragOffset.x - parseInt(document.getElementById("ai-car-decal").style.width) / 2,
+                 y: e.clientY - wRect.top  - dragOffset.y - parseInt(document.getElementById("ai-car-decal").style.height) / 2 };
+    applyDecalTransform();
+  });
+  document.addEventListener("mouseup", () => { dragOffset = null; });
+
+  document.getElementById("ai-car-capture").addEventListener("click", async () => {
+    const wrap = document.getElementById("ai-car-wrap");
+    const wW = wrap.clientWidth, wH = wrap.clientHeight;
+    const svgEl = document.getElementById("car-svg");
+    const svgStr = new XMLSerializer().serializeToString(svgEl);
+    const svgBlob = new Blob([svgStr], { type: "image/svg+xml" });
+    const svgBlobUrl = URL.createObjectURL(svgBlob);
+
+    const c = document.createElement("canvas"); c.width = wW; c.height = wH;
+    const ctx = c.getContext("2d");
+    ctx.fillStyle = "#0d1117"; ctx.fillRect(0, 0, wW, wH);
+
+    const carImg = await loadImage(svgBlobUrl);
+    ctx.drawImage(carImg, 0, 0, wW, wH);
+    URL.revokeObjectURL(svgBlobUrl);
+
+    const decalEl = document.getElementById("ai-car-decal");
+    const decalImg = await loadImage(aiDataUrl);
+    const dW = parseInt(decalEl.style.width), dH = parseInt(decalEl.style.height);
+    ctx.drawImage(decalImg, decalPos.x, decalPos.y, dW, dH);
+
+    const a = document.createElement("a");
+    a.href = c.toDataURL("image/png"); a.download = `preview_coche_${aiSeed}.png`; a.click();
+    toast("Preview capturado");
   });
 
   document.getElementById("ai-export-svg").addEventListener("click", async () => {
