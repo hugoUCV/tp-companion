@@ -328,12 +328,63 @@ async function enhancePromptWithAI(userPrompt) {
   return (await res.text()).trim().replace(/^["']|["']$/g, "");
 }
 
+const SD_MODEL_MAP = {
+  "sd-albedo-xl":      "AlbedoBase XL (SDXL)",
+  "sd-dreamshaper-xl": "Dreamshaper XL",
+  "sd-juggernaut-xl":  "Juggernaut XL",
+  "sd-pony-xl":        "Pony Diffusion XL",
+};
+
+async function generateOneSD(promptVal, model, size) {
+  const sdModel  = SD_MODEL_MAP[model] || "AlbedoBase XL (SDXL)";
+  const isVector = document.getElementById("ai-mode-vector").checked;
+  const suffix   = isVector ? VECTOR_SUFFIX : "isolated on white background, clean edges";
+  const full     = promptVal.includes(VECTOR_SUFFIX) ? promptVal : promptVal + ", " + suffix;
+  const negative = document.getElementById("ai-negative")?.value.trim() || DEFAULT_NEGATIVE;
+  const sz       = Math.min(parseInt(size), 1024);
+
+  // Horde usa ### para separar positivo/negativo dentro del prompt
+  const hordePrompt = full + " ### " + negative;
+
+  const submitRes = await fetch("https://stablehorde.net/api/v2/generate/async", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "apikey": "0000000000" },
+    body: JSON.stringify({
+      prompt: hordePrompt,
+      params: { width: sz, height: sz, steps: 25, cfg_scale: 7.5, sampler_name: "k_euler_a", n: 1 },
+      r2: false, nsfw: false, censor_nsfw: true,
+      models: [sdModel],
+    }),
+  });
+  if (!submitRes.ok) throw new Error(`Horde submit: ${submitRes.status}`);
+  const { id } = await submitRes.json();
+  if (!id) throw new Error("Horde no devolvió ID");
+
+  const progText = document.getElementById("ai-progress-text");
+  for (let i = 0; i < 80; i++) {
+    await new Promise(r => setTimeout(r, 3000));
+    const check = await (await fetch(`https://stablehorde.net/api/v2/generate/check/${id}`)).json();
+    if (check.faulted) throw new Error("Horde: generación fallida");
+    const eta = check.wait_time ?? "?";
+    const pos = check.queue_position ?? "?";
+    progText.textContent = `Cola SD: posición ${pos}, ~${eta}s restantes…`;
+    if (check.done) {
+      const status = await (await fetch(`https://stablehorde.net/api/v2/generate/status/${id}`)).json();
+      const b64 = status.generations?.[0]?.img;
+      if (!b64) throw new Error("Horde: sin imagen en respuesta");
+      return `data:image/webp;base64,${b64}`;
+    }
+  }
+  throw new Error("Tiempo de espera agotado (>4 min)");
+}
+
 async function generateOne(promptVal, model, size, seed) {
+  if (model.startsWith("sd-")) return generateOneSD(promptVal, model, size);
+
   const isVector  = document.getElementById("ai-mode-vector").checked;
   const suffix    = isVector ? VECTOR_SUFFIX : "isolated on white background, clean crisp edges, high detail";
   const full      = promptVal.includes(VECTOR_SUFFIX) ? promptVal : promptVal + ", " + suffix;
-  const negInput  = document.getElementById("ai-negative");
-  const negative  = negInput?.value.trim() || DEFAULT_NEGATIVE;
+  const negative  = document.getElementById("ai-negative")?.value.trim() || DEFAULT_NEGATIVE;
   const url       = `https://image.pollinations.ai/prompt/${encodeURIComponent(full)}?width=${size}&height=${size}&nologo=true&model=${model}&seed=${seed}&negative=${encodeURIComponent(negative)}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);

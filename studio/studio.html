@@ -172,12 +172,20 @@
           <div class="field">
             <label>Modelo</label>
             <select id="ai-model">
-              <option value="flux">Flux — general (recomendado)</option>
-              <option value="flux-realism">Flux Realism — fotorrealista</option>
-              <option value="flux-anime">Flux Anime — ilustración/cómic</option>
-              <option value="flux-3d">Flux 3D — efecto tridimensional</option>
-              <option value="flux-pro">Flux Pro — máxima calidad</option>
-              <option value="turbo">Turbo — más rápido</option>
+              <optgroup label="Flux · Pollinations (instantáneo)">
+                <option value="flux">Flux — general (recomendado)</option>
+                <option value="flux-realism">Flux Realism — fotorrealista</option>
+                <option value="flux-anime">Flux Anime — ilustración/cómic</option>
+                <option value="flux-3d">Flux 3D — tridimensional</option>
+                <option value="flux-pro">Flux Pro — máxima calidad</option>
+                <option value="turbo">Turbo — más rápido</option>
+              </optgroup>
+              <optgroup label="Stable Diffusion · Horde (10-60 s, gratis)">
+                <option value="sd-albedo-xl">AlbedoBase XL — equilibrado</option>
+                <option value="sd-dreamshaper-xl">Dreamshaper XL — ilustración</option>
+                <option value="sd-juggernaut-xl">Juggernaut XL — detallado</option>
+                <option value="sd-pony-xl">Pony Diffusion XL — anime/cartoon</option>
+              </optgroup>
             </select>
           </div>
 
